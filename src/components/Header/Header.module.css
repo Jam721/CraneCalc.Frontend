@@ -1,0 +1,94 @@
+.header {
+    width: 100%;
+    background: var(--headerBg);
+    padding: 1.0417vh 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.headerContent {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+
+}
+
+.logo {
+    margin-left: 8.6875vw;
+    display: flex;
+    font-weight: 700;
+    font-size: 1.5625vw;
+    color: var(--textColor);
+    text-transform: uppercase;
+    letter-spacing: 0.0391vw;
+    text-decoration: none;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 1.25vw;
+    color: var(--mainColor);
+    margin-right: 0.5vw;
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.1719vw;
+    margin-left: auto;
+    margin-right: 40%;
+    align-items: center;
+}
+
+.navLink {
+    color: var(--textSecondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.75vw;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.3472vh 0;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: var(--textColor);
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0.1389vh;
+    background: var(--mainColor);
+    transition: width 0.3s ease;
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+    width: 100%;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 3vw;
+        margin-left: 5%;
+    }
+
+    .logo i {
+        font-size: 2.5vw;
+    }
+
+    .navLinks {
+        margin-right: 5%;
+        gap: 2vw;
+    }
+
+    .navLink {
+        font-size: 1.8vw;
+    }
+}

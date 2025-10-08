@@ -1,0 +1,245 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(0.390625vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2.0833vh;
+}
+
+.modalContent {
+    background: var(--cardBg);
+    backdrop-filter: var(--glassEffect);
+    border: 1px solid var(--borderColor);
+    border-radius: 0.78125vw;
+    padding: 2.0833vh;
+    width: 100%;
+    max-width: 31.25vw;
+    box-shadow: 0 1.3889vh 4.1667vh rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2.7778vh) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.7778vh;
+    padding-bottom: 1.3889vh;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.modalTitle {
+    font-size: 1.25vw;
+    font-weight: 600;
+    color: var(--textColor);
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: var(--textSecondary);
+    font-size: 1.1vw;
+    cursor: pointer;
+    padding: 0.5208vw;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--textColor);
+}
+
+.filtersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2.0833vh;
+    margin-bottom: 2.7778vh;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6944vh;
+}
+
+.filterLabel {
+    font-size: 0.875vw;
+    font-weight: 500;
+    color: var(--textColor);
+    margin-bottom: 0.3472vh;
+}
+
+.filterInput {
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid var(--borderColor);
+    border-radius: 0.5208vw;
+    padding: 1.0417vh 0.78125vw;
+    color: var(--textColor);
+    font-size: 0.875vw;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filterInput:focus {
+    border-color: var(--mainColor);
+    box-shadow: 0 0 0 0.1302vw var(--mainColorLight);
+}
+
+.filterInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.weightRange {
+    display: flex;
+    align-items: center;
+    gap: 0.78125vw;
+}
+
+.weightInput {
+    flex: 1;
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid var(--borderColor);
+    border-radius: 0.5208vw;
+    padding: 1.0417vh 0.78125vw;
+    color: var(--textColor);
+    font-size: 0.875vw;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.weightInput:focus {
+    border-color: var(--mainColor);
+    box-shadow: 0 0 0 0.1302vw var(--mainColorLight);
+}
+
+.rangeSeparator {
+    color: var(--textSecondary);
+    font-size: 0.875vw;
+    font-weight: 500;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.0417vw;
+}
+
+.resetButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--borderColor);
+    border-radius: 0.5208vw;
+    padding: 0.6944vh 1.0417vw;
+    color: var(--textSecondary);
+    font-size: 0.75vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5208vw;
+}
+
+.resetButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--textColor);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 0.78125vw;
+}
+
+.cancelButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--borderColor);
+    border-radius: 0.5208vw;
+    padding: 0.6944vh 1.5625vw;
+    color: var(--textColor);
+    font-size: 0.75vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.applyButton {
+    background: var(--mainColor);
+    border: none;
+    border-radius: 0.5208vw;
+    padding: 0.6944vh 1.5625vw;
+    color: white;
+    font-size: 0.75vw;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.applyButton:hover {
+    background: var(--mainColorLight);
+    transform: translateY(-0.0694vh);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .modalOverlay {
+        padding: 1.0417vh;
+    }
+
+    .modalContent {
+        max-width: 90vw;
+        padding: 4.1667vh 2.0833vh;
+    }
+
+    .modalTitle {
+        font-size: 5vw;
+    }
+
+    .closeButton {
+        font-size: 4vw;
+    }
+
+    .filterLabel {
+        font-size: 3.5vw;
+    }
+
+    .filterInput,
+    .weightInput {
+        font-size: 3.5vw;
+        padding: 1.5vh 3vw;
+    }
+
+    .rangeSeparator {
+        font-size: 3.5vw;
+    }
+
+    .resetButton,
+    .cancelButton,
+    .applyButton {
+        font-size: 3.2vw;
+        padding: 1.5vh 4vw;
+    }
+}

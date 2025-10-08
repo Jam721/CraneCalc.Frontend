@@ -1,0 +1,307 @@
+.pageContainer {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    color: var(--textColor);
+    border: 1px solid var(--borderColor);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 1.7361vh;
+    margin-left: 4.6875vw;
+    padding: 1.0417vh 0.78125vw;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-size: 0.75vw;
+    border-radius: 0.2604vw;
+}
+
+.backButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.backButton:hover {
+    color: black;
+}
+
+.backButton:hover::before {
+    transform: scaleX(1);
+    transform-origin: right;
+}
+
+.backButton i {
+    margin-right: 0.3125vw;
+    transition: color 0.3s;
+}
+
+.cargoDetail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.0833vh;
+    margin-bottom: 2.7778vh;
+    width: 100%;
+    max-width: 70.3125vw;
+    margin: 0 auto;
+    padding: 0 0.78125vw;
+}
+
+.cargoImage {
+    width: 100%;
+    border-radius: 0.46875vw;
+    box-shadow: 0 0.5556vh 1.7361vh rgba(0, 0, 0, 0.2);
+    height: 55.5556vh;
+    object-fit: cover;
+    border: 1px solid var(--borderColor);
+    transition: transform 0.3s ease;
+}
+
+.cargoImage:hover {
+    transform: scale(1.02);
+}
+
+.cargoInfo {
+    background: linear-gradient(135deg, var(--cardBg) 0%, var(--cardBgHover) 100%);
+    backdrop-filter: var(--glassEffect);
+    border-radius: 0.46875vw;
+    padding: 2.0833vh 1.1719vw;
+    box-shadow: 0 0.5556vh 1.7361vh rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--borderColor);
+}
+
+.cargoTitle {
+    font-family: 'Akrobat', sans-serif;
+    font-size: 1.875vw;
+    margin-bottom: 1.3889vh;
+    color: var(--textColor);
+    padding-bottom: 1.0417vh;
+    border-bottom: 1px solid var(--borderColor);
+    text-transform: uppercase;
+    letter-spacing: 0.026vw;
+}
+
+.specItemText {
+    font-family: 'Akrobat', sans-serif;
+    font-size: 0.8984375vw;
+    color: var(--textColor);
+    font-weight: 700;
+}
+
+.cargoSpecs {
+    margin-bottom: 1.7361vh;
+}
+
+.modelDesc {
+    font-family: 'Akrobat', sans-serif;
+    font-size: 0.8984375vw;
+    color: var(--textColor);
+    line-height: 1.6;
+    margin-bottom: 2.7778vh;
+}
+
+.specItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8333vh 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.specItem span:first-child {
+    color: var(--textSecondary);
+    font-size: 0.75vw;
+    font-weight: 400;
+}
+
+.addToCalc {
+    background: var(--mainColor);
+    color: white;
+    border: none;
+    padding: 1.3889vh 2.3438vw;
+    font-size: 0.9375vw;
+    font-weight: 600;
+    border-radius: 0.2604vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.026vw;
+    width: 100%;
+}
+
+.addToCalc:hover {
+    background: var(--mainColorLight);
+    transform: translateY(-0.1736vh);
+    box-shadow: 0 0.5208vw 1.0417vh rgba(255, 80, 0, 0.3);
+}
+
+.notFound {
+    text-align: center;
+    padding: 8.3333vh 0;
+}
+
+.notFound h2 {
+    font-size: 2vw;
+    margin-bottom: 2.7778vh;
+    color: var(--textColor);
+}
+
+.backLink {
+    color: var(--mainColor);
+    text-decoration: none;
+    font-size: 0.9375vw;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.backLink:hover {
+    color: var(--mainColorLight);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .cargoDetail {
+        grid-template-columns: 1fr;
+        max-width: 90%;
+        gap: 4.1667vh;
+    }
+
+    .cargoTitle {
+        font-size: 3.5vw;
+    }
+
+    .specItemText {
+        font-size: 1.8vw;
+    }
+
+    .modelDesc {
+        font-size: 1.8vw;
+    }
+
+    .specItem span:first-child {
+        font-size: 1.6vw;
+    }
+
+    .addToCalc {
+        font-size: 1.8vw;
+    }
+
+    .backButton {
+        font-size: 1.6vw;
+        margin-left: 5%;
+    }
+}
+
+/* Добавим в конец файла */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8.3333vh 0;
+    text-align: center;
+}
+
+.spinner {
+    width: 3.125vw;
+    height: 3.125vw;
+    border: 0.2604vw solid rgba(255, 255, 255, 0.3);
+    border-top: 0.2604vw solid var(--mainColor);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 2.0833vh;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+    text-align: center;
+    padding: 8.3333vh 0;
+    color: var(--textColor);
+}
+
+.errorContainer h3 {
+    font-size: 1.5vw;
+    margin-bottom: 1.3889vh;
+    color: #ff6b6b;
+}
+
+.errorContainer p {
+    font-size: 0.9375vw;
+    margin-bottom: 2.7778vh;
+    color: var(--textSecondary);
+}
+
+.notFound {
+    text-align: center;
+    padding: 8.3333vh 0;
+    color: var(--textColor);
+}
+
+.notFound h2 {
+    font-size: 2vw;
+    margin-bottom: 1.3889vh;
+}
+
+.notFound p {
+    font-size: 0.9375vw;
+    margin-bottom: 2.7778vh;
+    color: var(--textSecondary);
+}
+
+.backLink {
+    color: var(--mainColor);
+    text-decoration: none;
+    font-size: 0.9375vw;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 1.0417vh 1.5625vw;
+    border: 1px solid var(--mainColor);
+    border-radius: 0.2604vw;
+}
+
+.backLink:hover {
+    color: var(--mainColorLight);
+    background: rgba(255, 80, 0, 0.1);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .loadingContainer,
+    .errorContainer,
+    .notFound {
+        padding: 15vh 5%;
+    }
+
+    .spinner {
+        width: 8vw;
+        height: 8vw;
+    }
+
+    .errorContainer h3,
+    .notFound h2 {
+        font-size: 5vw;
+    }
+
+    .errorContainer p,
+    .notFound p,
+    .backLink {
+        font-size: 3.5vw;
+    }
+}
