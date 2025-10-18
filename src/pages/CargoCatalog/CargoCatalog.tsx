@@ -6,14 +6,10 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import FiltersModal from '../../components/FiltersModal/FiltersModal';
 import type { BreadcrumbItem } from '../../types/breadcrumbs';
 import { useCargoData } from '../../hooks/useCargoData';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import {setFilters, clearFilters, type FiltersState} from '../../store/slices/filtersSlice';
 import styles from './CargoCatalog.module.css';
 import craneImg from '/assets/crane.png';
-
-interface Filters {
-    Type?: string;
-    MinWeight?: number;
-    MaxWeight?: number;
-}
 
 const CargoCatalog = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +18,10 @@ const CargoCatalog = () => {
     const [cartQuantity, setCartQuantity] = useState(0);
     const [, setAddingItems] = useState<Set<string>>(new Set());
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-    const [activeFilters, setActiveFilters] = useState<Filters>({});
+
+    // Redux state
+    const activeFilters = useAppSelector((state) => state.filters);
+    const dispatch = useAppDispatch();
 
     const {
         cargoData,
@@ -36,7 +35,7 @@ const CargoCatalog = () => {
         { label: 'Каталог грузов', isActive: true }
     ];
 
-    // Фильтрация теперь зависит от appliedSearchQuery
+    // Фильтрация с использованием Redux состояния
     useEffect(() => {
         let filtered = [...cargoData];
 
@@ -66,7 +65,7 @@ const CargoCatalog = () => {
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        setAppliedSearchQuery(searchQuery); // Применяем поиск только при отправке формы
+        setAppliedSearchQuery(searchQuery);
     };
 
     const handleAddToCart = async (cargoId: string) => {
@@ -82,8 +81,12 @@ const CargoCatalog = () => {
         });
     };
 
-    const handleApplyFilters = (filters: Filters) => {
-        setActiveFilters(filters);
+    const handleApplyFilters = (filters: FiltersState) => {
+        dispatch(setFilters(filters));
+    };
+
+    const handleClearFilters = () => {
+        dispatch(clearFilters());
     };
 
     const hasActiveFilters = Object.values(activeFilters).some(value =>
@@ -178,9 +181,9 @@ const CargoCatalog = () => {
                         <button
                             className={styles.clearFiltersButton}
                             onClick={() => {
-                                setActiveFilters({});
+                                handleClearFilters();
                                 setSearchQuery('');
-                                setAppliedSearchQuery(''); // Сбрасываем примененный поиск
+                                setAppliedSearchQuery('');
                             }}
                         >
                             Сбросить все фильтры

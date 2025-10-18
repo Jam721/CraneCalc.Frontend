@@ -7,7 +7,7 @@ interface CargoCardProps {
     onAddToCart: (cargoId: string) => void;
 }
 
-const CargoCard = ({ cargo, onAddToCart }: CargoCardProps) => {
+const CargoCard = ({ cargo }: CargoCardProps) => {
     const dimensions = `${cargo.length} × ${cargo.width} × ${cargo.height} м`;
 
     return (
@@ -45,12 +45,12 @@ const CargoCard = ({ cargo, onAddToCart }: CargoCardProps) => {
                 >
                     Подробнее
                 </Link>
-                <button
-                    className={styles.addToCalc}
-                    onClick={() => onAddToCart(cargo.id)}
-                >
-                    Добавить в расчет
-                </button>
+                {/*<button*/}
+                {/*    className={styles.addToCalc}*/}
+                {/*    onClick={() => onAddToCart(cargo.id)}*/}
+                {/*>*/}
+                {/*    Добавить в расчет*/}
+                {/*</button>*/}
             </div>
         </div>
     );

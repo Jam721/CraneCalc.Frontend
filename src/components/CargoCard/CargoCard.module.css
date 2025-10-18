@@ -1,10 +1,11 @@
+/* === Базовые стили (остаются) === */
 .rentCard {
     background: var(--bgGradient);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.6);
     display: flex;
-    border-radius: 0.46875vw;
     flex-direction: column;
+    border-radius: 0.46875vw;
     height: 100%;
     min-height: 48.6111vh;
     box-shadow: 0 0.6944vh 2.0833vh rgba(0, 0, 0, 0.4);
@@ -32,7 +33,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
     transition: transform 0.3s ease;
 }
 
@@ -92,7 +93,8 @@
     flex-shrink: 0;
 }
 
-.rentCardButton button {
+.rentCardButton button,
+.btnDetail {
     flex: 1;
     height: 100%;
     display: flex;
@@ -107,40 +109,173 @@
     transition: background-color 0.25s;
 }
 
+.btnDetail {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btnDetail:hover,
 .rentCardButton button:hover {
     background-color: rgba(0, 0, 0, 0.15);
 }
 
-.btnDetail {
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
+/* === 🔹 Адаптивность === */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .rentCard {
+        border-radius: 10px;
+        min-height: auto;
+    }
+
+    .contentName,
+    .contentText {
+        font-size: 1.8vw;
+        padding: 0.8vh 2vw;
+    }
+
+    .rentCardButton {
+        font-size: 1.6vw;
+        height: 6vh;
+    }
 }
 
-.addToCalc:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+/* === 🎯 Мобильный редизайн карточек (до 768px) === */
+@media (max-width: 768px) {
+    .rentCard {
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--cardBg);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+        border: 1px solid var(--borderColor);
+        display: flex;
+        flex-direction: column;
+        min-height: unset;
+        margin: 0 auto;
+        width: 92%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rentCard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .rentCardPhoto {
+        height: 200px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .rentCardPhoto img {
+        border-radius: 14px 14px 0 0;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.3s ease;
+    }
+
+    .rentCardPhoto:hover img {
+        transform: scale(1.03);
+    }
+
+    /* Контент делаем карточками внутри */
+    .rentCardContent {
+        border: none;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 8px 14px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        backdrop-filter: var(--glassEffect);
+    }
+
+    .contentName {
+        font-size: 13px;
+        color: var(--textSecondary);
+        padding: 0;
+        margin-bottom: 2px;
+    }
+
+    .contentText {
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        text-transform: none;
+        letter-spacing: 0.3px;
+        padding: 0;
+    }
+
+    /* Кнопки внизу — крупные, с разделением */
+    .rentCardButton {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        padding: 10px 14px 14px;
+        background: transparent;
+        border: none;
+    }
+
+    .btnDetail,
+    .rentCardButton button {
+        width: 100%;
+        height: 46px;
+        border-radius: 10px;
+        border: none;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: #fff;
+        transition: all 0.25s ease;
+    }
+
+    .btnDetail {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btnDetail:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .addToCalc {
+        background: var(--mainColor);
+        box-shadow: 0 4px 12px rgba(255, 80, 0, 0.4);
+    }
+
+    .addToCalc:hover {
+        background: var(--mainColorLight);
+    }
+
+    /* Общие улучшения типографики */
+    .rentCard h4,
+    .rentCard p {
+        color: #fff;
+    }
 }
 
-.addToCalc:disabled:hover {
-    background-color: transparent;
+/* === Маленькие экраны (до 480px) === */
+@media (max-width: 480px) {
+    .rentCard {
+        width: 95%;
+        border-radius: 12px;
+    }
+
+    .rentCardPhoto {
+        height: 170px;
+    }
+
+    .contentName {
+        font-size: 12px;
+    }
+
+    .contentText {
+        font-size: 14px;
+    }
+
+    .btnDetail,
+    .rentCardButton button {
+        height: 44px;
+        font-size: 14px;
+    }
 }
 
-/* Добавим в CargoCard.module.css */
-.btnDetail {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: inherit;
-    font: inherit;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.25s;
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.btnDetail:hover {
-    background-color: rgba(0, 0, 0, 0.15);
-}
