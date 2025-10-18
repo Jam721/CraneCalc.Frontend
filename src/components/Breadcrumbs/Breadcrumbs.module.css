@@ -45,3 +45,9 @@
         margin: 0 1.5vw;
     }
 }
+
+@media (max-width: 390px) {
+    .breadcrumbs {
+        font-size: 4rem;
+    }
+}

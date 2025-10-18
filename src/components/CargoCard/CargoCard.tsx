@@ -12,6 +12,7 @@ const CargoCard = ({ cargo }: CargoCardProps) => {
 
     return (
         <div className={styles.rentCard}>
+            {/* Обложка с изображением */}
             <div className={styles.rentCardPhoto}>
                 <img
                     src={cargo.imageUrl}
@@ -23,34 +24,30 @@ const CargoCard = ({ cargo }: CargoCardProps) => {
                 />
             </div>
 
+            {/* Контент в стиле карточек */}
             <div className={styles.rentCardContent}>
-                <div className={styles.contentName}>Тип:</div>
+                <div className={styles.contentName}>Тип груза</div>
                 <div className={styles.contentText}>{cargo.type}</div>
             </div>
 
             <div className={styles.rentCardContent}>
-                <div className={styles.contentName}>Размеры:</div>
+                <div className={styles.contentName}>Габариты</div>
                 <div className={styles.contentText}>{dimensions}</div>
             </div>
 
             <div className={styles.rentCardContent}>
-                <div className={styles.contentName}>Масса:</div>
-                <div className={styles.contentText}>{cargo.weight} т</div>
+                <div className={styles.contentName}>Вес</div>
+                <div className={styles.contentText}>{cargo.weight} тонн</div>
             </div>
 
+            {/* Кнопка действия */}
             <div className={styles.rentCardButton}>
                 <Link
                     to={`/cargo-detail/${cargo.id}`}
                     className={styles.btnDetail}
                 >
-                    Подробнее
+                    📋 Подробнее
                 </Link>
-                {/*<button*/}
-                {/*    className={styles.addToCalc}*/}
-                {/*    onClick={() => onAddToCart(cargo.id)}*/}
-                {/*>*/}
-                {/*    Добавить в расчет*/}
-                {/*</button>*/}
             </div>
         </div>
     );

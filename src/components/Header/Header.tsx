@@ -26,6 +26,8 @@ const Header = () => {
                     CraneCalc
                 </Link>
 
+
+
                 {/* Кнопка меню для мобильных */}
                 <button
                     className={`${styles.menuButton} ${isMenuOpen ? styles.menuButtonActive : ''}`}
@@ -37,8 +39,8 @@ const Header = () => {
                     <span></span>
                 </button>
 
-                {/* Навигация */}
-                <nav className={`${styles.navLinks} ${isMenuOpen ? styles.navLinksActive : ''}`}>
+                {/* Мобильная навигация */}
+                <nav className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}>
                     <Link
                         to="/cargo-catalog"
                         className={`${styles.navLink} ${isActiveLink('/cargo-catalog')}`}

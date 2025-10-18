@@ -1,3 +1,5 @@
+/* CargoCatalog.module.css */
+/* === ОСНОВНАЯ ВЕРСИЯ ДЛЯ ПК (БЕЗ ИЗМЕНЕНИЙ) === */
 .cargoCatalog {
     width: 100%;
     min-height: 100vh;
@@ -182,7 +184,6 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Добавим в конец файла */
 .loadingContainer {
     display: flex;
     flex-direction: column;
@@ -254,8 +255,6 @@
 .noResults p {
     font-size: 0.9375vw;
 }
-
-/* Добавим новые стили в существующий файл */
 
 .searchRow {
     display: flex;
@@ -329,184 +328,442 @@
     transform: translateY(-0.0694vh);
 }
 
-/* Адаптивность для мобильных устройств */
-/* ===== Минималистичный адаптив под телефоны ===== */
-/* ===== Мобильный редизайн страницы ===== */
-@media (max-width: 768px) {
-    :root {
-        --mutedText: #777;
-        --shadowSoft: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
+/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
+@media (max-width: 390px) {
     .cargoCatalog {
-        background: var(--bgGradient);
-        padding: 2rem 1rem 5rem;
+        padding: 0;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        background: var(--bgGradient);
+        position: relative;
+        overflow-x: hidden;
     }
 
+    /* Хлебные крошки */
+    .cargoCatalog :global(.breadcrumbs) {
+        padding: 16px 16px 8px !important;
+        font-size: 14px !important;
+        position: relative;
+        z-index: 10;
+    }
+
+    .cargoCatalog :global(.breadcrumbs a),
+    .cargoCatalog :global(.breadcrumbs span) {
+        font-size: 14px !important;
+    }
+
+    /* Герой секция */
     .hero {
-        text-align: center;
-        margin-bottom: 1rem;
+        padding: 24px 20px 16px;
+        max-width: 100%;
+        text-align: left;
+        position: relative;
+        z-index: 5;
     }
 
     .heroTitle {
-        font-size: 1.8rem;
-        font-weight: 700;
+        font-size: 28px;
+        font-weight: 800;
         color: var(--textColor);
-        margin-bottom: 0.25rem;
+        text-transform: none;
+        margin-bottom: 12px;
+        line-height: 1.2;
+        position: relative;
+    }
+
+    .heroTitle::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 48px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--mainColor), transparent);
+        border-radius: 2px;
     }
 
     .heroSubtitle {
-        font-size: 1rem;
-        color: var(--mutedText);
-        margin-bottom: 1.5rem;
+        font-size: 16px;
+        color: var(--textSecondary);
+        margin-bottom: 24px;
+        font-weight: 400;
+        line-height: 1.5;
+        max-width: 100%;
     }
 
+    /* Поиск и фильтры */
     .searchRow {
-        display: flex;
         flex-direction: column;
-        gap: 1rem;
+        max-width: 100%;
+        align-items: stretch;
+        gap: 16px;
+        margin: 0;
+        position: relative;
+        z-index: 5;
+    }
+
+    .searchContainer {
+        max-width: 100%;
+        margin: 0;
     }
 
     .searchForm {
-        display: flex;
-        align-items: center;
-        background: var(--cardBg);
-        border-radius: 50px;
-        padding: 0.4rem 0.8rem;
-        box-shadow: var(--shadowSoft);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
         border: 1px solid var(--borderColor);
+        min-height: 56px;
+        transition: all 0.3s ease;
+    }
+
+    .searchForm:focus-within {
+        border-color: var(--mainColor);
+        box-shadow: 0 0 0 2px rgba(255, 80, 0, 0.2);
+        transform: translateY(-2px);
     }
 
     .searchInput {
-        flex: 1;
-        border: none;
-        outline: none;
-        font-size: 1rem;
-        padding: 0.8rem 0.6rem;
-        background: transparent;
+        padding: 16px 20px;
+        font-size: 16px;
+        font-weight: 400;
         color: var(--textColor);
+    }
+
+    .searchInput::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 16px;
     }
 
     .searchBtn {
-        border: none;
+        padding: 0 24px;
+        font-size: 18px;
         background: var(--mainColor);
-        color: #fff;
-        border-radius: 50%;
-        width: 42px;
-        height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s ease;
+        border-radius: 0 16px 16px 0;
+        min-width: 64px;
+        transition: all 0.3s ease;
     }
 
     .searchBtn:active {
-        background: #3755c0;
+        background: var(--mainColorLight);
+        transform: scale(0.95);
     }
 
     .filterButton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background: var(--cardBg);
-        color: var(--textColor);
-        border: 1px solid var(--borderColor);
+        padding: 16px 24px;
+        font-size: 16px;
         border-radius: 16px;
-        padding: 0.9rem;
-        font-size: 1rem;
-        font-weight: 500;
-        box-shadow: var(--shadowSoft);
-    }
-
-    .cardsGrid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-        margin-top: 1rem;
-    }
-
-    .post-card {
-        background: var(--cardBg);
-        border-radius: 20px;
-        box-shadow: var(--shadowSoft);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
         border: 1px solid var(--borderColor);
-        padding: 1.2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .post-card:active {
-        transform: scale(0.98);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    }
-
-    .post-card h4 {
-        font-size: 1.1rem;
-        font-weight: 600;
+        justify-content: center;
+        width: 100%;
+        gap: 12px;
         color: var(--textColor);
-        margin-bottom: 0.25rem;
+        font-weight: 500;
+        min-height: 56px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
 
-    .post-card p {
-        font-size: 0.95rem;
-        color: var(--mutedText);
-        line-height: 1.4;
+    .filterButton::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+        );
+        transition: left 0.6s ease;
     }
 
+    .filterButton:active::before {
+        left: 100%;
+    }
+
+    .filterButton i {
+        font-size: 18px;
+    }
+
+    .filterButtonActive {
+        background: rgba(255, 80, 0, 0.15);
+        border-color: var(--mainColor);
+        color: var(--mainColor);
+    }
+
+    .filterIndicator {
+        width: 8px;
+        height: 8px;
+        top: -4px;
+        right: -4px;
+        background: var(--mainColor);
+        box-shadow: 0 0 10px var(--mainColor);
+    }
+
+    /* Сетка карточек */
+    .cardsGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 100%;
+        padding: 16px 16px 96px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Плавающая кнопка корзины */
     .fixedCalcBtn {
         position: fixed;
-        bottom: 1.5rem;
-        right: 1.2rem;
-        width: 56px;
-        height: 56px;
-        background: var(--mainColor);
-        color: #fff;
+        bottom: 32px;
+        right: 24px;
+        width: 72px;
+        height: 72px;
         border-radius: 50%;
+        background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
+        box-shadow:
+                0 8px 32px rgba(255, 80, 0, 0.4),
+                0 4px 16px rgba(255, 80, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
-        box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
-        transition: background 0.2s ease;
-        z-index: 999;
+        padding: 0;
+        z-index: 100;
+        border: none;
+        transition: all 0.3s ease;
     }
 
-    .fixedCalcBtn:active {
-        background: #3755c0;
+    .fixedCalcBtn:active:not(.disabled) {
+        transform: scale(0.92);
+        background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
+        box-shadow:
+                0 4px 16px rgba(255, 80, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .noResults {
+    .iconWrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .iconWrapperIco {
+        width: 32px;
+        height: 32px;
+        filter: brightness(0) invert(1);
+        transition: transform 0.3s ease;
+    }
+
+    .fixedCalcBtn:active:not(.disabled) .iconWrapperIco {
+        transform: scale(0.9);
+    }
+
+    .badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ff4444;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        border: 3px solid #1a1a1a;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        animation: pulse 2s infinite;
+    }
+
+    /* Состояние загрузки */
+    .loadingContainer {
+        padding: 64px 32px;
         text-align: center;
-        color: var(--mutedText);
-        margin-top: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border-width: 3px;
+        border-top-color: var(--mainColor);
+        margin-bottom: 24px;
+    }
+
+    .loadingContainer p {
+        font-size: 18px;
+        color: var(--textSecondary);
+        font-weight: 500;
+    }
+
+    /* Состояние ошибки */
+    .errorContainer {
+        padding: 64px 24px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 16px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+        position: relative;
+        z-index: 1;
+    }
+
+    .errorContainer h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: #ff6b6b;
+        font-weight: 600;
+    }
+
+    .errorContainer p {
+        font-size: 16px;
+        margin-bottom: 32px;
+        color: var(--textSecondary);
+        line-height: 1.5;
+    }
+
+    .retryButton {
+        padding: 16px 32px;
+        font-size: 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        background: var(--mainColor);
+        color: white;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .retryButton:active {
+        transform: scale(0.95);
+        background: var(--mainColorLight);
+    }
+
+    /* Нет результатов */
+    .noResults {
+        padding: 48px 24px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 16px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+        position: relative;
+        z-index: 1;
     }
 
     .noResults h3 {
-        font-size: 1.4rem;
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: var(--textColor);
         font-weight: 600;
-        margin-bottom: 0.5rem;
     }
 
     .noResults p {
-        font-size: 1rem;
+        font-size: 16px;
+        margin-bottom: 24px;
+        color: var(--textSecondary);
+        line-height: 1.5;
     }
 
     .clearFiltersButton {
-        display: block;
-        margin: 1rem auto 0;
-        padding: 0.8rem 1.6rem;
+        padding: 16px 32px;
+        font-size: 16px;
         border-radius: 12px;
-        border: 1px solid var(--borderColor);
-        background: #fff;
-        font-weight: 500;
-        color: var(--textColor);
-        box-shadow: var(--shadowSoft);
+        background: var(--mainColor);
+        color: white;
+        border: none;
+        width: 100%;
+        max-width: 300px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .clearFiltersButton:active {
+        transform: scale(0.95);
+        background: var(--mainColorLight);
+    }
+
+    /* Анимации для мобильных */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cardsGrid > * {
+        animation: slideUp 0.4s ease-out;
+    }
+
+    /* ФИКС ДЛЯ МОДАЛЬНОГО ОКНА ФИЛЬТРОВ */
+    /* Убираем все глобальные переопределения и используем нормальные стили */
+}
+
+/* Дополнительные медиа-запросы для других устройств */
+@media (max-width: 428px) and (min-width: 391px) {
+    /* Для iPhone 12 Pro Max и подобных */
+    .hero {
+        padding: 32px 24px 16px;
+    }
+
+    .heroTitle {
+        font-size: 30px;
+    }
+
+    .heroSubtitle {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Для очень маленьких экранов */
+    .heroTitle {
+        font-size: 26px;
+    }
+
+    .heroSubtitle {
+        font-size: 15px;
+    }
+
+    .searchInput {
+        font-size: 15px;
+        padding: 14px 18px;
+    }
+
+    .filterButton {
+        font-size: 15px;
+        padding: 14px 20px;
+    }
+
+    .fixedCalcBtn {
+        width: 64px;
+        height: 64px;
+        right: 16px;
+        bottom: 24px;
+    }
+
+    .iconWrapperIco {
+        width: 28px;
+        height: 28px;
+    }
+
+    .badge {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
     }
 }

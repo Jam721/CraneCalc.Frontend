@@ -6,7 +6,7 @@ import * as THREE from 'three';
 
 const TowerCrane3D = () => {
     const groupRef = useRef<THREE.Group>(null);
-    const fbx = useLoader(FBXLoader, '/assets/Tower_crane.fbx');
+    const fbx = useLoader(FBXLoader, `${import.meta.env.BASE_URL}assets/Tower_crane.fbx`);
     const [modelReady, setModelReady] = useState(false);
 
     useEffect(() => {

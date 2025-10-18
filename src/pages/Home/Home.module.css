@@ -1,3 +1,4 @@
+/* Home.module.css */
 .home {
     width: 100%;
     min-height: 100vh;
@@ -201,5 +202,187 @@
 
     .ctaButton {
         font-size: 1.2vw;
+    }
+}
+
+/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
+@media (max-width: 390px) {
+    .home {
+        padding: 0;
+        min-height: 100vh;
+        background: var(--bgGradient);
+        display: flex;
+        align-items: center;
+    }
+
+    .content {
+        flex-direction: column;
+        height: auto;
+        gap: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .textSection {
+        flex: none;
+        padding: 48px 24px 32px;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .title {
+        font-size: 32px;
+        font-weight: 800;
+        background: none;
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
+        color: var(--textColor);
+        text-transform: none;
+        letter-spacing: -0.5px;
+        margin-bottom: 16px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        color: var(--textSecondary);
+        margin-bottom: 24px;
+        font-weight: 500;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .description {
+        margin-bottom: 32px;
+    }
+
+    .description p {
+        font-size: 16px;
+        color: var(--textColor);
+        margin-bottom: 20px;
+        line-height: 1.6;
+        font-weight: 400;
+        text-align: left;
+    }
+
+    .featuresList {
+        list-style: none;
+        padding-left: 0;
+        text-align: left;
+    }
+
+    .featuresList li {
+        font-size: 16px;
+        color: var(--textColor);
+        margin-bottom: 16px;
+        line-height: 1.5;
+        padding-left: 28px;
+        font-weight: 400;
+    }
+
+    .featuresList li::before {
+        content: '✓';
+        color: var(--mainColor);
+        font-size: 18px;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .ctaButton {
+        background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
+        color: white;
+        border: none;
+        padding: 20px 32px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 8px 24px rgba(255, 80, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .ctaButton::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+        );
+        transition: left 0.6s ease;
+    }
+
+    .ctaButton:active::before {
+        left: 100%;
+    }
+
+    .ctaButton:active {
+        transform: scale(0.95);
+        background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
+    }
+
+    .craneSection {
+        flex: none;
+        height: 320px;
+        width: 100%;
+        padding: 0;
+        margin-top: 24px;
+    }
+
+    .craneSection::before {
+        width: 90%;
+        height: 90%;
+        background: radial-gradient(circle,
+        rgba(255, 80, 0, 0.15) 0%,
+        transparent 70%
+        );
+    }
+
+    /* Анимации для мобильных */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .textSection > * {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .title {
+        animation-delay: 0.1s;
+    }
+
+    .subtitle {
+        animation-delay: 0.2s;
+    }
+
+    .description {
+        animation-delay: 0.3s;
+    }
+
+    .ctaButton {
+        animation-delay: 0.4s;
     }
 }

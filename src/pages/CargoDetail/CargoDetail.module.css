@@ -1,3 +1,4 @@
+/* CargoDetail.module.css */
 .pageContainer {
     width: 100%;
     min-height: 100vh;
@@ -303,5 +304,317 @@
     .notFound p,
     .backLink {
         font-size: 3.5vw;
+    }
+}
+
+/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
+@media (max-width: 390px) {
+    .pageContainer {
+        padding: 0;
+        background: var(--bgGradient);
+        min-height: 100vh;
+    }
+
+    /* Хлебные крошки */
+    .pageContainer :global(.breadcrumbs) {
+        padding: 16px 16px 8px !important;
+        font-size: 14px !important;
+    }
+
+    .pageContainer :global(.breadcrumbs a),
+    .pageContainer :global(.breadcrumbs span) {
+        font-size: 14px !important;
+    }
+
+    /* Основной контент */
+    .cargoDetail {
+        grid-template-columns: 1fr;
+        gap: 0;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Изображение груза */
+    .cargoImage {
+        width: 100%;
+        height: 280px;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        object-fit: cover;
+    }
+
+    .cargoImage:hover {
+        transform: none;
+    }
+
+    /* Информация о грузе */
+    .cargoInfo {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border-radius: 20px 20px 0 0;
+        padding: 24px 20px;
+        margin-top: -20px;
+        position: relative;
+        z-index: 2;
+        border: 1px solid var(--borderColor);
+        border-bottom: none;
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .cargoTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--borderColor);
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 700;
+    }
+
+    /* Спецификации */
+    .cargoSpecs {
+        margin-bottom: 24px;
+    }
+
+    .specItem {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        align-items: center;
+    }
+
+    .specItem:last-child {
+        border-bottom: none;
+    }
+
+    .specItem span:first-child {
+        color: var(--textSecondary);
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .specItemText {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--textColor);
+        text-align: right;
+    }
+
+    /* Описание */
+    .modelDesc {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 32px;
+        color: var(--textColor);
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        border: 1px solid var(--borderColor);
+    }
+
+    /* Кнопка добавления в расчет */
+    .addToCalc {
+        background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
+        color: white;
+        border: none;
+        padding: 20px 24px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: 100%;
+        box-shadow: 0 8px 24px rgba(255, 80, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .addToCalc::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+        );
+        transition: left 0.6s ease;
+    }
+
+    .addToCalc:active::before {
+        left: 100%;
+    }
+
+    .addToCalc:active {
+        transform: scale(0.98);
+        background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
+    }
+
+    /* Состояние загрузки */
+    .loadingContainer {
+        padding: 120px 24px;
+        text-align: center;
+    }
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid var(--mainColor);
+        margin-bottom: 24px;
+    }
+
+    .loadingContainer p {
+        font-size: 18px;
+        color: var(--textSecondary);
+        font-weight: 500;
+    }
+
+    /* Состояние ошибки */
+    .errorContainer {
+        padding: 120px 24px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+    }
+
+    .errorContainer h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: #ff6b6b;
+        font-weight: 600;
+    }
+
+    .errorContainer p {
+        font-size: 16px;
+        margin-bottom: 32px;
+        color: var(--textSecondary);
+        line-height: 1.5;
+    }
+
+    /* Не найдено */
+    .notFound {
+        padding: 120px 24px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+    }
+
+    .notFound h2 {
+        font-size: 24px;
+        margin-bottom: 16px;
+        color: var(--textColor);
+        font-weight: 600;
+    }
+
+    .notFound p {
+        font-size: 16px;
+        margin-bottom: 32px;
+        color: var(--textSecondary);
+        line-height: 1.5;
+    }
+
+    /* Ссылка назад */
+    .backLink {
+        color: var(--mainColor);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 16px 32px;
+        border: 2px solid var(--mainColor);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        display: inline-block;
+        background: rgba(255, 80, 0, 0.1);
+    }
+
+    .backLink:active {
+        background: var(--mainColor);
+        color: white;
+        transform: scale(0.95);
+    }
+
+    /* Анимации */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cargoInfo {
+        animation: slideUp 0.5s ease-out;
+    }
+}
+
+/* Дополнительные медиа-запросы */
+@media (max-width: 428px) and (min-width: 391px) {
+    /* Для iPhone 12 Pro Max и подобных */
+    .cargoImage {
+        height: 300px;
+    }
+
+    .cargoInfo {
+        padding: 28px 24px;
+    }
+
+    .cargoTitle {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Для очень маленьких экранов */
+    .cargoImage {
+        height: 240px;
+    }
+
+    .cargoInfo {
+        padding: 20px 16px;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .cargoTitle {
+        font-size: 22px;
+    }
+
+    .specItem {
+        padding: 12px 0;
+    }
+
+    .specItem span:first-child {
+        font-size: 13px;
+    }
+
+    .specItemText {
+        font-size: 14px;
+    }
+
+    .modelDesc {
+        font-size: 14px;
+        padding: 16px;
+    }
+
+    .addToCalc {
+        padding: 16px 20px;
+        font-size: 16px;
     }
 }
