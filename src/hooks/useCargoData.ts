@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { CargoItem } from '../types/cargo';
 import type { CargoApiParams } from '../types/paginatedResponse';
 import { CargoService } from '../services/cargoService';
@@ -10,14 +10,17 @@ export const useCargoData = (initialParams: CargoApiParams = {}) => {
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
+    // Используем ref для initialParams, чтобы избежать лишних ререндеров
+    const initialParamsRef = useRef(initialParams);
+
     const fetchCargoData = useCallback(async (params: CargoApiParams = {}) => {
         try {
             setLoading(true);
             setError(null);
 
             const response = await CargoService.getCargoPaginated({
-                PageNumber: params.PageNumber || initialParams.PageNumber || 1,
-                PageSize: params.PageSize || initialParams.PageSize || 100,
+                PageNumber: params.PageNumber || initialParamsRef.current.PageNumber || 1,
+                PageSize: params.PageSize || initialParamsRef.current.PageSize || 100,
                 ...params
             });
 
@@ -29,11 +32,11 @@ export const useCargoData = (initialParams: CargoApiParams = {}) => {
         } finally {
             setLoading(false);
         }
-    }, [initialParams.PageNumber, initialParams.PageSize]);
+    }, []); // Пустой массив зависимостей - функция создается один раз
 
     useEffect(() => {
-        fetchCargoData(initialParams);
-    }, []);
+        fetchCargoData(initialParamsRef.current);
+    }, [fetchCargoData]); // Только одна зависимость
 
     const refetch = useCallback((params?: CargoApiParams) => {
         fetchCargoData(params);

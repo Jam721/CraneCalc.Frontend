@@ -17,6 +17,7 @@ interface Filters {
 
 const CargoCatalog = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
     const [filteredCargo, setFilteredCargo] = useState<CargoItem[]>([]);
     const [cartQuantity, setCartQuantity] = useState(0);
     const [, setAddingItems] = useState<Set<string>>(new Set());
@@ -35,40 +36,37 @@ const CargoCatalog = () => {
         { label: 'Каталог грузов', isActive: true }
     ];
 
-    // Применяем все фильтры к данным
+    // Фильтрация теперь зависит от appliedSearchQuery
     useEffect(() => {
         let filtered = [...cargoData];
 
-        // Фильтр по поисковому запросу
-        if (searchQuery.trim() !== '') {
+        if (appliedSearchQuery.trim() !== '') {
             filtered = filtered.filter(cargo =>
-                cargo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                cargo.type.toLowerCase().includes(searchQuery.toLowerCase())
+                cargo.title.toLowerCase().includes(appliedSearchQuery.toLowerCase()) ||
+                cargo.type.toLowerCase().includes(appliedSearchQuery.toLowerCase())
             );
         }
 
-        // Фильтр по типу
         if (activeFilters.Type) {
             filtered = filtered.filter(cargo =>
                 cargo.type.toLowerCase().includes(activeFilters.Type!.toLowerCase())
             );
         }
 
-        // Фильтр по минимальному весу
         if (activeFilters.MinWeight !== undefined) {
             filtered = filtered.filter(cargo => cargo.weight >= activeFilters.MinWeight!);
         }
 
-        // Фильтр по максимальному весу
         if (activeFilters.MaxWeight !== undefined) {
             filtered = filtered.filter(cargo => cargo.weight <= activeFilters.MaxWeight!);
         }
 
         setFilteredCargo(filtered);
-    }, [cargoData, searchQuery, activeFilters]);
+    }, [cargoData, appliedSearchQuery, activeFilters]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
+        setAppliedSearchQuery(searchQuery); // Применяем поиск только при отправке формы
     };
 
     const handleAddToCart = async (cargoId: string) => {
@@ -176,12 +174,13 @@ const CargoCatalog = () => {
                 <div className={styles.noResults}>
                     <h3>Грузы не найдены</h3>
                     <p>Попробуйте изменить параметры поиска или фильтры</p>
-                    {hasActiveFilters && (
+                    {(hasActiveFilters || appliedSearchQuery) && (
                         <button
                             className={styles.clearFiltersButton}
                             onClick={() => {
                                 setActiveFilters({});
                                 setSearchQuery('');
+                                setAppliedSearchQuery(''); // Сбрасываем примененный поиск
                             }}
                         >
                             Сбросить все фильтры
