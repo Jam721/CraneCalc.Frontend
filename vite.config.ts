@@ -7,30 +7,28 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png'], // оставили только необходимые
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}']
+      },
       manifest: {
-        name: 'Каталог грузов',
-        short_name: 'Грузы',
-        description: 'Каталог грузов с расчетом для башенного крана',
-        theme_color: '#000000',
-        background_color: '#121212',
-        display: 'standalone',
-        scope: '/CraneCalc.Frontend/',
-        start_url: '/CraneCalc.Frontend/',
+        name: 'CraneCalc',
+        short_name: 'CC',
+        description: 'Приложение для подсчета производительности башенного крана',
+        theme_color: '#ffffff',
         icons: [
           {
-            src: '/pwa-192x192.png',
+            src: 'android-chrome-192x192.png',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/png'
           },
           {
-            src: '/pwa-512x512.png',
+            src: 'android-chrome-512x512.png',
             sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
-      },
-    }),
+            type: 'image/png'
+          }
+        ]
+      }
+    })
   ],
   base: '/CraneCalc.Frontend/',
   server: {
