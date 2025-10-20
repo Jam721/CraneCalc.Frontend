@@ -207,7 +207,6 @@
     }
 }
 
-/* === ПРЕМИУМ АДАПТИВНАЯ ВЕРСИЯ ДЛЯ СМАРТФОНОВ === */
 @media (max-width: 480px) {
     .home {
         background: var(--bgGradient);
@@ -299,7 +298,6 @@
     }
 }
 
-/* === УТОЧНЕНИЯ ДЛЯ IPHONE 12 (390px) === */
 @media (max-width: 390px) {
     .textSection {
         padding: 22vh 6% 12vh;
@@ -336,7 +334,6 @@
     }
 }
 
-/* === ОПТИМИЗАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
 @media (max-width: 320px) {
     .textSection {
         padding: 18vh 5% 10vh;
@@ -364,7 +361,6 @@
     }
 }
 
-/* === ПРЕМИУМ АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ === */
 @media (max-width: 480px) {
     @keyframes fadeInUp {
         from {
@@ -411,7 +407,7 @@
     }
 }
 
-/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+
 @media (max-width: 768px) and (orientation: landscape) {
     .content {
         flex-direction: row;
