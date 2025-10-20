@@ -6,11 +6,11 @@
   "proxy": "http://localhost:8080",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
     "preview": "vite preview",
-    "tauri": "tauri",
-    "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "homepage": "https://Jam721.github.io/CraneCalc.Frontend/",
   "dependencies": {
