@@ -149,39 +149,84 @@
     box-shadow: 0 0.5208vw 1.0417vh rgba(255, 80, 0, 0.3);
 }
 
-.notFound {
-    text-align: center;
-    padding: 8.3333vh 0;
-}
-
-.notFound h2 {
-    font-size: 2vw;
-    margin-bottom: 2.7778vh;
-    color: var(--textColor);
-}
-
-.backLink {
-    color: var(--mainColor);
-    text-decoration: none;
-    font-size: 0.9375vw;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.backLink:hover {
-    color: var(--mainColorLight);
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ПЛАНШЕТОВ === */
+@media (max-width: 1024px) {
     .cargoDetail {
-        grid-template-columns: 1fr;
-        max-width: 90%;
-        gap: 4.1667vh;
+        max-width: 85vw;
+        gap: 3vh;
+    }
+
+    .backButton {
+        margin-left: 3vw;
+        font-size: 1.1vw;
+        padding: 1.2vh 1vw;
+        border-radius: 0.4vw;
+    }
+
+    .cargoImage {
+        height: 45vh;
+        border-radius: 0.8vw;
+    }
+
+    .cargoInfo {
+        border-radius: 0.8vw;
+        padding: 2.5vh 1.5vw;
     }
 
     .cargoTitle {
-        font-size: 3.5vw;
+        font-size: 2.2vw;
+        margin-bottom: 1.8vh;
+    }
+
+    .specItemText {
+        font-size: 1.3vw;
+    }
+
+    .modelDesc {
+        font-size: 1.3vw;
+        margin-bottom: 2.5vh;
+    }
+
+    .specItem span:first-child {
+        font-size: 1.1vw;
+    }
+
+    .addToCalc {
+        font-size: 1.3vw;
+        padding: 1.6vh 2vw;
+        border-radius: 0.4vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .cargoDetail {
+        grid-template-columns: 1fr;
+        max-width: 90vw;
+        gap: 4vh;
+        padding: 0 2vw;
+    }
+
+    .backButton {
+        margin-left: 2vw;
+        font-size: 1.8vw;
+        padding: 1.5vh 1.5vw;
+        border-radius: 0.6vw;
+        margin-bottom: 2vh;
+    }
+
+    .cargoImage {
+        height: 40vh;
+        border-radius: 1.2vw;
+    }
+
+    .cargoInfo {
+        border-radius: 1.2vw;
+        padding: 3vh 2vw;
+    }
+
+    .cargoTitle {
+        font-size: 3vw;
+        margin-bottom: 2vh;
     }
 
     .specItemText {
@@ -190,6 +235,7 @@
 
     .modelDesc {
         font-size: 1.8vw;
+        margin-bottom: 3vh;
     }
 
     .specItem span:first-child {
@@ -198,132 +244,31 @@
 
     .addToCalc {
         font-size: 1.8vw;
-    }
-
-    .backButton {
-        font-size: 1.6vw;
-        margin-left: 5%;
+        padding: 2vh 2.5vw;
+        border-radius: 0.6vw;
     }
 }
 
-/* Добавим в конец файла */
-.loadingContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 8.3333vh 0;
-    text-align: center;
-}
-
-.spinner {
-    width: 3.125vw;
-    height: 3.125vw;
-    border: 0.2604vw solid rgba(255, 255, 255, 0.3);
-    border-top: 0.2604vw solid var(--mainColor);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 2.0833vh;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.errorContainer {
-    text-align: center;
-    padding: 8.3333vh 0;
-    color: var(--textColor);
-}
-
-.errorContainer h3 {
-    font-size: 1.5vw;
-    margin-bottom: 1.3889vh;
-    color: #ff6b6b;
-}
-
-.errorContainer p {
-    font-size: 0.9375vw;
-    margin-bottom: 2.7778vh;
-    color: var(--textSecondary);
-}
-
-.notFound {
-    text-align: center;
-    padding: 8.3333vh 0;
-    color: var(--textColor);
-}
-
-.notFound h2 {
-    font-size: 2vw;
-    margin-bottom: 1.3889vh;
-}
-
-.notFound p {
-    font-size: 0.9375vw;
-    margin-bottom: 2.7778vh;
-    color: var(--textSecondary);
-}
-
-.backLink {
-    color: var(--mainColor);
-    text-decoration: none;
-    font-size: 0.9375vw;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    padding: 1.0417vh 1.5625vw;
-    border: 1px solid var(--mainColor);
-    border-radius: 0.2604vw;
-}
-
-.backLink:hover {
-    color: var(--mainColorLight);
-    background: rgba(255, 80, 0, 0.1);
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-    .loadingContainer,
-    .errorContainer,
-    .notFound {
-        padding: 15vh 5%;
-    }
-
-    .spinner {
-        width: 8vw;
-        height: 8vw;
-    }
-
-    .errorContainer h3,
-    .notFound h2 {
-        font-size: 5vw;
-    }
-
-    .errorContainer p,
-    .notFound p,
-    .backLink {
-        font-size: 3.5vw;
-    }
-}
-
-/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
-@media (max-width: 390px) {
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ БОЛЬШИХ СМАРТФОНОВ === */
+@media (max-width: 480px) {
     .pageContainer {
         padding: 0;
         background: var(--bgGradient);
-        min-height: 100vh;
     }
 
     /* Хлебные крошки */
     .pageContainer :global(.breadcrumbs) {
-        padding: 16px 16px 8px !important;
+        padding: 12px 16px 8px !important;
         font-size: 14px !important;
     }
 
-    .pageContainer :global(.breadcrumbs a),
-    .pageContainer :global(.breadcrumbs span) {
-        font-size: 14px !important;
+    .backButton {
+        margin: 12px 0 8px 16px;
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
     }
 
     /* Основной контент */
@@ -338,35 +283,31 @@
     /* Изображение груза */
     .cargoImage {
         width: 100%;
-        height: 280px;
+        height: 240px;
         border-radius: 0;
         border: none;
         box-shadow: none;
         object-fit: cover;
     }
 
-    .cargoImage:hover {
-        transform: none;
-    }
-
     /* Информация о грузе */
     .cargoInfo {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(20px);
-        border-radius: 20px 20px 0 0;
-        padding: 24px 20px;
-        margin-top: -20px;
+        border-radius: 16px 16px 0 0;
+        padding: 20px 16px;
+        margin-top: -16px;
         position: relative;
         z-index: 2;
         border: 1px solid var(--borderColor);
         border-bottom: none;
-        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.3);
     }
 
     .cargoTitle {
-        font-size: 24px;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
+        font-size: 22px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
         border-bottom: 1px solid var(--borderColor);
         text-transform: none;
         letter-spacing: 0;
@@ -375,13 +316,13 @@
 
     /* Спецификации */
     .cargoSpecs {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
 
     .specItem {
         display: flex;
         justify-content: space-between;
-        padding: 16px 0;
+        padding: 12px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         align-items: center;
     }
@@ -397,7 +338,7 @@
     }
 
     .specItemText {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         color: var(--textColor);
         text-align: right;
@@ -405,13 +346,13 @@
 
     /* Описание */
     .modelDesc {
-        font-size: 16px;
-        line-height: 1.6;
-        margin-bottom: 32px;
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 24px;
         color: var(--textColor);
-        padding: 20px;
+        padding: 16px;
         background: rgba(255, 255, 255, 0.03);
-        border-radius: 12px;
+        border-radius: 8px;
         border: 1px solid var(--borderColor);
     }
 
@@ -420,16 +361,16 @@
         background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
         color: white;
         border: none;
-        padding: 20px 24px;
-        font-size: 18px;
+        padding: 16px 20px;
+        font-size: 16px;
         font-weight: 700;
-        border-radius: 16px;
+        border-radius: 12px;
         cursor: pointer;
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         width: 100%;
-        box-shadow: 0 8px 24px rgba(255, 80, 0, 0.3);
+        box-shadow: 0 6px 20px rgba(255, 80, 0, 0.3);
         position: relative;
         overflow: hidden;
     }
@@ -457,86 +398,251 @@
         transform: scale(0.98);
         background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
     }
+}
 
-    /* Состояние загрузки */
-    .loadingContainer {
-        padding: 120px 24px;
-        text-align: center;
+/* === УТОЧНЕНИЯ ДЛЯ IPHONE 12 (390px) === */
+@media (max-width: 390px) {
+    .cargoImage {
+        height: 280px;
+    }
+
+    .cargoInfo {
+        padding: 24px 20px;
+        margin-top: -20px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .cargoTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+    }
+
+    .specItem {
+        padding: 16px 0;
+    }
+
+    .specItem span:first-child {
+        font-size: 14px;
+    }
+
+    .specItemText {
+        font-size: 16px;
+    }
+
+    .modelDesc {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 32px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .addToCalc {
+        padding: 20px 24px;
+        font-size: 18px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(255, 80, 0, 0.3);
+    }
+
+    .backButton {
+        margin: 16px 0 12px 20px;
+        padding: 14px 18px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+}
+
+/* === СТИЛИ ДЛЯ СОСТОЯНИЙ (ЗАГРУЗКА, ОШИБКА, НЕ НАЙДЕНО) === */
+.loadingContainer,
+.errorContainer,
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--textColor);
+}
+
+.loadingContainer {
+    padding: 8.3333vh 0;
+}
+
+.errorContainer,
+.notFound {
+    padding: 8.3333vh 0;
+}
+
+.spinner {
+    width: 3.125vw;
+    height: 3.125vw;
+    border: 0.2604vw solid rgba(255, 255, 255, 0.3);
+    border-top: 0.2604vw solid var(--mainColor);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 2.0833vh;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.errorContainer h3,
+.notFound h2 {
+    font-size: 1.5vw;
+    margin-bottom: 1.3889vh;
+    color: #ff6b6b;
+}
+
+.errorContainer p,
+.notFound p {
+    font-size: 0.9375vw;
+    margin-bottom: 2.7778vh;
+    color: var(--textSecondary);
+}
+
+.backLink {
+    color: var(--mainColor);
+    text-decoration: none;
+    font-size: 0.9375vw;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 1.0417vh 1.5625vw;
+    border: 1px solid var(--mainColor);
+    border-radius: 0.2604vw;
+}
+
+.backLink:hover {
+    color: var(--mainColorLight);
+    background: rgba(255, 80, 0, 0.1);
+}
+
+/* === АДАПТИВНОСТЬ ДЛЯ СОСТОЯНИЙ === */
+@media (max-width: 1024px) {
+    .loadingContainer,
+    .errorContainer,
+    .notFound {
+        padding: 6vh 0;
     }
 
     .spinner {
-        width: 48px;
-        height: 48px;
+        width: 5vw;
+        height: 5vw;
+        border-width: 0.3vw;
+    }
+
+    .errorContainer h3,
+    .notFound h2 {
+        font-size: 2.2vw;
+    }
+
+    .errorContainer p,
+    .notFound p {
+        font-size: 1.4vw;
+    }
+
+    .backLink {
+        font-size: 1.4vw;
+        padding: 1.2vh 1.8vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .loadingContainer,
+    .errorContainer,
+    .notFound {
+        padding: 8vh 5%;
+    }
+
+    .spinner {
+        width: 8vw;
+        height: 8vw;
+        border-width: 0.4vw;
+    }
+
+    .errorContainer h3,
+    .notFound h2 {
+        font-size: 3.5vw;
+    }
+
+    .errorContainer p,
+    .notFound p {
+        font-size: 2vw;
+    }
+
+    .backLink {
+        font-size: 2vw;
+        padding: 1.5vh 2.5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .loadingContainer {
+        padding: 80px 24px;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
         border: 3px solid rgba(255, 255, 255, 0.3);
         border-top: 3px solid var(--mainColor);
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
 
     .loadingContainer p {
-        font-size: 18px;
+        font-size: 16px;
         color: var(--textSecondary);
         font-weight: 500;
     }
 
-    /* Состояние ошибки */
-    .errorContainer {
-        padding: 120px 24px;
-        text-align: center;
+    .errorContainer,
+    .notFound {
+        padding: 80px 20px;
         background: rgba(255, 255, 255, 0.05);
-        margin: 16px;
-        border-radius: 20px;
+        margin: 12px 16px;
+        border-radius: 12px;
         backdrop-filter: blur(10px);
         border: 1px solid var(--borderColor);
     }
 
     .errorContainer h3 {
-        font-size: 22px;
-        margin-bottom: 16px;
+        font-size: 20px;
+        margin-bottom: 12px;
         color: #ff6b6b;
         font-weight: 600;
     }
 
     .errorContainer p {
-        font-size: 16px;
-        margin-bottom: 32px;
+        font-size: 15px;
+        margin-bottom: 24px;
         color: var(--textSecondary);
         line-height: 1.5;
     }
 
-    /* Не найдено */
-    .notFound {
-        padding: 120px 24px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.05);
-        margin: 16px;
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--borderColor);
-    }
-
     .notFound h2 {
-        font-size: 24px;
-        margin-bottom: 16px;
+        font-size: 22px;
+        margin-bottom: 12px;
         color: var(--textColor);
         font-weight: 600;
     }
 
     .notFound p {
-        font-size: 16px;
-        margin-bottom: 32px;
+        font-size: 15px;
+        margin-bottom: 24px;
         color: var(--textSecondary);
         line-height: 1.5;
     }
 
-    /* Ссылка назад */
     .backLink {
         color: var(--mainColor);
         text-decoration: none;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
-        padding: 16px 32px;
+        padding: 14px 28px;
         border: 2px solid var(--mainColor);
-        border-radius: 12px;
+        border-radius: 10px;
         transition: all 0.3s ease;
         display: inline-block;
         background: rgba(255, 80, 0, 0.1);
@@ -547,53 +653,60 @@
         color: white;
         transform: scale(0.95);
     }
+}
 
-    /* Анимации */
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@media (max-width: 390px) {
+    .loadingContainer {
+        padding: 120px 24px;
     }
 
-    .cargoInfo {
-        animation: slideUp 0.5s ease-out;
+    .spinner {
+        width: 48px;
+        height: 48px;
+    }
+
+    .loadingContainer p {
+        font-size: 18px;
+    }
+
+    .errorContainer,
+    .notFound {
+        padding: 100px 24px;
+        border-radius: 16px;
+        margin: 16px;
+    }
+
+    .errorContainer h3,
+    .notFound h2 {
+        font-size: 22px;
+    }
+
+    .errorContainer p,
+    .notFound p {
+        font-size: 16px;
+    }
+
+    .backLink {
+        font-size: 16px;
+        padding: 16px 32px;
+        border-radius: 12px;
     }
 }
 
-/* Дополнительные медиа-запросы */
-@media (max-width: 428px) and (min-width: 391px) {
-    /* Для iPhone 12 Pro Max и подобных */
-    .cargoImage {
-        height: 300px;
-    }
-
-    .cargoInfo {
-        padding: 28px 24px;
-    }
-
-    .cargoTitle {
-        font-size: 26px;
-    }
-}
-
+/* === ОПТИМИЗАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
 @media (max-width: 320px) {
-    /* Для очень маленьких экранов */
     .cargoImage {
-        height: 240px;
+        height: 220px;
     }
 
     .cargoInfo {
         padding: 20px 16px;
         border-radius: 16px 16px 0 0;
+        margin-top: -16px;
     }
 
     .cargoTitle {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .specItem {
@@ -616,5 +729,73 @@
     .addToCalc {
         padding: 16px 20px;
         font-size: 16px;
+    }
+
+    .backButton {
+        margin: 12px 0 8px 16px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .loadingContainer,
+    .errorContainer,
+    .notFound {
+        padding: 60px 16px;
+    }
+
+    .spinner {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .cargoImage {
+        height: 200px;
+    }
+
+    .cargoInfo {
+        margin-top: -12px;
+        padding: 20px;
+    }
+
+    .cargoDetail {
+        gap: 2vh;
+    }
+
+    .loadingContainer,
+    .errorContainer,
+    .notFound {
+        padding: 40px 20px;
+    }
+}
+
+/* === ПОДДЕРЖКА HIGH-DPI ЭКРАНОВ === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .backButton,
+    .cargoImage,
+    .cargoInfo,
+    .addToCalc,
+    .backLink {
+        border-width: 0.5px;
+    }
+}
+
+/* === АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ === */
+@media (max-width: 768px) {
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cargoInfo {
+        animation: slideUp 0.5s ease-out;
     }
 }

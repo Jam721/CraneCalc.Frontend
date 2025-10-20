@@ -3,23 +3,34 @@
     width: 100%;
     min-height: 100vh;
     background: #151515;
-    padding: 0 0 4.1667vh 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Фоновая анимация - занимает весь экран */
+.backgroundAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .content {
     display: flex;
     width: 100%;
-    height: 85vh;
+    height: 100vh;
     margin: 0 auto;
     align-items: center;
     gap: 3.125vw;
-    padding-top: 2.0833vh;
+    position: relative;
+    z-index: 2;
 }
 
 .textSection {
     flex: 1;
-    padding: 2.0833vh 0 2.0833vh 4.6875vw;
-    z-index: 2;
+    padding: 0 0 0 4.6875vw;
 }
 
 .title {
@@ -82,43 +93,7 @@
     top: 0;
 }
 
-.ctaButton {
-    background: linear-gradient(135deg, #ff5000 0%, #ff8000 100%);
-    color: white;
-    border: none;
-    padding: 1.7361vh 3.125vw;
-    font-size: 1vw;
-    font-weight: 700;
-    border-radius: 0.5208vw;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.0521vw;
-    box-shadow: 0 0.5208vw 1.5625vw rgba(255, 80, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.ctaButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.ctaButton:hover {
-    transform: translateY(-0.3472vh);
-    box-shadow: 0 0.7813vw 2.3438vw rgba(255, 80, 0, 0.4);
-}
-
-.ctaButton:hover::before {
-    left: 100%;
-}
-
+/* Контейнер для крана - теперь просто для баланса композиции */
 .craneSection {
     flex: 1;
     height: 100%;
@@ -129,236 +104,272 @@
     position: relative;
 }
 
+/* Градиент для акцента на анимации */
 .craneSection::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(255, 80, 0, 0.1) 0%, transparent 70%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 80, 0, 0.15) 0%, transparent 60%);
     z-index: 1;
+    pointer-events: none;
+}
+
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ПЛАНШЕТОВ === */
+@media (max-width: 1024px) {
+    .content {
+        height: 100vh;
+        gap: 2.5vw;
+    }
+
+    .textSection {
+        padding: 0 0 0 3vw;
+    }
+
+    .title {
+        font-size: 4vw;
+        margin-bottom: 1.5vh;
+    }
+
+    .subtitle {
+        font-size: 1.6vw;
+        margin-bottom: 2.5vh;
+    }
+
+    .description p {
+        font-size: 1.3vw;
+        margin-bottom: 1.5vh;
+    }
+
+    .featuresList li {
+        font-size: 1.2vw;
+        padding-left: 2vw;
+        margin-bottom: 0.8vh;
+    }
+
+    .craneSection {
+        padding-right: 3vw;
+    }
+
+    .craneSection::before {
+        background: radial-gradient(circle, rgba(255, 80, 0, 0.12) 0%, transparent 65%);
+    }
 }
 
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
         height: auto;
-        gap: 4.1667vh;
-        padding: 2.0833vh 5% 4.1667vh 5%;
+        min-height: 100vh;
+        gap: 0;
+        padding: 0;
     }
 
     .textSection {
-        padding: 0;
+        padding: 15vh 5% 8vh;
         text-align: center;
+        flex: none;
     }
 
     .title {
         font-size: 8vw;
+        margin-bottom: 2vh;
     }
 
     .subtitle {
         font-size: 4vw;
+        margin-bottom: 3vh;
     }
 
     .description p {
         font-size: 3.5vw;
+        margin-bottom: 2vh;
     }
 
     .featuresList li {
         font-size: 3.2vw;
         padding-left: 6vw;
-    }
-
-    .ctaButton {
-        font-size: 3.5vw;
-        padding: 2.5vh 8vw;
+        margin-bottom: 1.5vh;
     }
 
     .craneSection {
         padding: 0;
-        height: 50vh;
+        height: 40vh;
         width: 100%;
+        flex: none;
+    }
+
+    .craneSection::before {
+        background: radial-gradient(circle, rgba(255, 80, 0, 0.1) 0%, transparent 70%);
     }
 }
 
-@media (min-width: 1920px) {
-    .title {
-        font-size: 4vw;
-    }
-
-    .subtitle {
-        font-size: 1.5vw;
-    }
-
-    .description p {
-        font-size: 1.2vw;
-    }
-
-    .featuresList li {
-        font-size: 1.1vw;
-    }
-
-    .ctaButton {
-        font-size: 1.2vw;
-    }
-}
-
-/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
-@media (max-width: 390px) {
+/* === ПРЕМИУМ АДАПТИВНАЯ ВЕРСИЯ ДЛЯ СМАРТФОНОВ === */
+@media (max-width: 480px) {
     .home {
-        padding: 0;
-        min-height: 100vh;
         background: var(--bgGradient);
-        display: flex;
-        align-items: center;
     }
 
     .content {
-        flex-direction: column;
-        height: auto;
+        min-height: 100vh;
         gap: 0;
-        padding: 0;
-        width: 100%;
     }
 
     .textSection {
-        flex: none;
-        padding: 48px 24px 32px;
-        text-align: left;
-        width: 100%;
-        box-sizing: border-box;
+        padding: 20vh 5% 10vh;
+        text-align: center;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
     }
 
     .title {
-        font-size: 32px;
+        font-size: 9vw;
         font-weight: 800;
-        background: none;
-        -webkit-background-clip: initial;
-        -webkit-text-fill-color: initial;
-        color: var(--textColor);
+        background: linear-gradient(135deg, #ffffff 0%, var(--mainColorLight) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-transform: none;
         letter-spacing: -0.5px;
-        margin-bottom: 16px;
+        margin-bottom: 4vw;
         line-height: 1.2;
-        text-align: center;
     }
 
     .subtitle {
-        font-size: 18px;
+        font-size: 5vw;
         color: var(--textSecondary);
-        margin-bottom: 24px;
+        margin-bottom: 6vw;
         font-weight: 500;
         line-height: 1.4;
-        text-align: center;
     }
 
     .description {
-        margin-bottom: 32px;
+        margin-bottom: 6vw;
     }
 
     .description p {
-        font-size: 16px;
+        font-size: 4vw;
         color: var(--textColor);
-        margin-bottom: 20px;
-        line-height: 1.6;
+        margin-bottom: 4vw;
+        line-height: 1.5;
         font-weight: 400;
-        text-align: left;
     }
 
     .featuresList {
-        list-style: none;
-        padding-left: 0;
         text-align: left;
+        display: inline-block;
+        margin: 0 auto;
     }
 
     .featuresList li {
-        font-size: 16px;
+        font-size: 4vw;
         color: var(--textColor);
-        margin-bottom: 16px;
-        line-height: 1.5;
-        padding-left: 28px;
+        margin-bottom: 3vw;
+        line-height: 1.4;
+        padding-left: 8vw;
         font-weight: 400;
     }
 
     .featuresList li::before {
         content: '✓';
         color: var(--mainColor);
-        font-size: 18px;
-        font-weight: bold;
-        position: absolute;
+        font-size: 4.5vw;
         left: 0;
-        top: 0;
-    }
-
-    .ctaButton {
-        background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
-        color: white;
-        border: none;
-        padding: 20px 32px;
-        font-size: 18px;
-        font-weight: 700;
-        border-radius: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        box-shadow: 0 8px 24px rgba(255, 80, 0, 0.3);
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
-        display: block;
-    }
-
-    .ctaButton::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-        );
-        transition: left 0.6s ease;
-    }
-
-    .ctaButton:active::before {
-        left: 100%;
-    }
-
-    .ctaButton:active {
-        transform: scale(0.95);
-        background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
+        top: -0.5vw;
+        text-shadow: 0 0 10px rgba(255, 80, 0, 0.5);
     }
 
     .craneSection {
-        flex: none;
-        height: 320px;
-        width: 100%;
-        padding: 0;
-        margin-top: 24px;
+        height: 30vh;
+        background: transparent;
     }
 
     .craneSection::before {
-        width: 90%;
-        height: 90%;
-        background: radial-gradient(circle,
-        rgba(255, 80, 0, 0.15) 0%,
+        background: radial-gradient(circle at center,
+        rgba(255, 80, 0, 0.1) 0%,
+        rgba(255, 80, 0, 0.05) 30%,
         transparent 70%
         );
+        animation: pulseGlow 3s ease-in-out infinite;
+    }
+}
+
+/* === УТОЧНЕНИЯ ДЛЯ IPHONE 12 (390px) === */
+@media (max-width: 390px) {
+    .textSection {
+        padding: 22vh 6% 12vh;
     }
 
-    /* Анимации для мобильных */
+    .title {
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+
+    .description p {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .featuresList li {
+        font-size: 16px;
+        padding-left: 28px;
+        margin-bottom: 12px;
+    }
+
+    .featuresList li::before {
+        font-size: 18px;
+        top: -1px;
+    }
+
+    .craneSection {
+        height: 25vh;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
+@media (max-width: 320px) {
+    .textSection {
+        padding: 18vh 5% 10vh;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .description p {
+        font-size: 14px;
+    }
+
+    .featuresList li {
+        font-size: 14px;
+        padding-left: 24px;
+    }
+
+    .craneSection {
+        height: 22vh;
+    }
+}
+
+/* === ПРЕМИУМ АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ === */
+@media (max-width: 480px) {
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
         }
         to {
             opacity: 1;
@@ -366,23 +377,74 @@
         }
     }
 
-    .textSection > * {
-        animation: fadeInUp 0.6s ease-out;
+    @keyframes pulseGlow {
+        0%, 100% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 0.8;
+        }
+    }
+
+    .textSection {
+        animation: fadeInUp 0.8s ease-out;
     }
 
     .title {
-        animation-delay: 0.1s;
+        animation: fadeInUp 0.8s ease-out 0.1s both;
     }
 
     .subtitle {
-        animation-delay: 0.2s;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
     .description {
-        animation-delay: 0.3s;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
     }
 
-    .ctaButton {
-        animation-delay: 0.4s;
+    .featuresList {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .craneSection {
+        animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .content {
+        flex-direction: row;
+        height: 100vh;
+        gap: 4vw;
+        padding: 0 5%;
+    }
+
+    .textSection {
+        padding: 0;
+        text-align: left;
+        flex: 1;
+    }
+
+    .title {
+        font-size: 5vw;
+    }
+
+    .subtitle {
+        font-size: 2.5vw;
+    }
+
+    .description p {
+        font-size: 2vw;
+    }
+
+    .featuresList li {
+        font-size: 1.8vw;
+        padding-left: 3vw;
+    }
+
+    .craneSection {
+        flex: 1;
+        height: 70vh;
     }
 }

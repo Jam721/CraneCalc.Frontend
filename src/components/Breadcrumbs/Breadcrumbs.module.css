@@ -33,21 +33,203 @@
     font-weight: 300;
 }
 
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ПЛАНШЕТОВ === */
+@media (max-width: 1024px) {
     .breadcrumbs {
-        font-size: 1.6vw;
-        margin: 0 5%;
-        padding: 2vh 0;
+        margin: 0 3vw;
+        padding: 1.5vh 0;
+        font-size: 1.1vw;
     }
 
     .breadcrumbSeparator {
-        margin: 0 1.5vw;
+        margin: 0 0.8vw;
     }
 }
 
+@media (max-width: 768px) {
+    .breadcrumbs {
+        margin: 0 4vw;
+        padding: 1.2vh 0;
+        font-size: 1.8vw;
+    }
+
+    .breadcrumbSeparator {
+        margin: 0 1.2vw;
+    }
+}
+
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ БОЛЬШИХ СМАРТФОНОВ === */
+@media (max-width: 480px) {
+    .breadcrumbs {
+        margin: 0 5vw;
+        padding: 1vh 0;
+        font-size: 3.5vw;
+        flex-wrap: wrap;
+        line-height: 1.4;
+    }
+
+    .breadcrumbSeparator {
+        margin: 0 2vw;
+    }
+
+    .breadcrumbItem {
+        margin-bottom: 0.5vh;
+    }
+}
+
+/* === УТОЧНЕНИЯ ДЛЯ IPHONE 12 (390px) === */
 @media (max-width: 390px) {
     .breadcrumbs {
-        font-size: 4rem;
+        margin: 0 5%;
+        padding: 12px 0 8px;
+        font-size: 14px;
+    }
+
+    .breadcrumbSeparator {
+        margin: 0 8px;
+        font-size: 12px;
+    }
+
+    .breadcrumbLink {
+        font-weight: 500;
+    }
+
+    .breadcrumbCurrent {
+        font-weight: 600;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
+@media (max-width: 320px) {
+    .breadcrumbs {
+        margin: 0 4%;
+        padding: 10px 0 6px;
+        font-size: 13px;
+    }
+
+    .breadcrumbSeparator {
+        margin: 0 6px;
+        font-size: 11px;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .breadcrumbs {
+        padding: 8px 0;
+        font-size: 2vw;
+    }
+
+    .breadcrumbSeparator {
+        margin: 0 1vw;
+    }
+}
+
+/* === ПОДДЕРЖКА HIGH-DPI ЭКРАНОВ === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .breadcrumbLink {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* === УЛУЧШЕНИЯ ДЛЯ ТЕМНОЙ ТЕМЫ === */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        background: transparent;
+    }
+
+    .breadcrumbLink {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .breadcrumbLink:hover {
+        color: var(--mainColor);
+    }
+
+    .breadcrumbCurrent {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .breadcrumbSeparator {
+        color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* === АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ === */
+@media (max-width: 768px) {
+    .breadcrumbLink {
+        transition: all 0.2s ease;
+    }
+
+    .breadcrumbLink:active {
+        transform: scale(0.95);
+        color: var(--mainColor);
+    }
+}
+
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ УЛУЧШЕНИЯ ВИЗУАЛЬНОЙ ИЕРАРХИИ === */
+@media (max-width: 480px) {
+    .breadcrumbs {
+        position: relative;
+    }
+
+    .breadcrumbs::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+        transparent,
+        var(--borderColor),
+        transparent
+        );
+    }
+
+    .breadcrumbCurrent {
+        position: relative;
+    }
+
+    .breadcrumbCurrent::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--mainColor);
+        border-radius: 1px;
+    }
+}
+
+/* === ПОДДЕРЖКА ДЛЯ IOS SAFARI === */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 768px) {
+        .breadcrumbs {
+            /* Улучшение отображения в Safari на iOS */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .breadcrumbLink {
+            /* Улучшение нажатия на ссылки в iOS */
+            -webkit-tap-highlight-color: rgba(255, 80, 0, 0.1);
+        }
+    }
+}
+
+/* === УЛУЧШЕНИЯ ДОСТУПНОСТИ === */
+@media (max-width: 768px) {
+    .breadcrumbLink:focus {
+        outline: 2px solid var(--mainColor);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    .breadcrumbCurrent {
+        /* Увеличиваем контрастность для текущей страницы */
+        color: var(--textColor);
+        font-weight: 700;
     }
 }

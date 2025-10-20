@@ -328,22 +328,200 @@
     transform: translateY(-0.0694vh);
 }
 
-/* === АДАПТИВНАЯ ВЕРСИЯ ДЛЯ IPHONE 12 (390px) В PX === */
-@media (max-width: 390px) {
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ПЛАНШЕТОВ === */
+@media (max-width: 1024px) {
+    .hero {
+        max-width: 60vw;
+        padding: 6vh 2vw 4vh;
+    }
+
+    .heroTitle {
+        font-size: 2.5vw;
+        margin-bottom: 2vh;
+    }
+
+    .heroSubtitle {
+        font-size: 1.2vw;
+        max-width: 40vw;
+        margin-bottom: 4vh;
+    }
+
+    .searchRow {
+        max-width: 60vw;
+        gap: 2vw;
+    }
+
+    .searchContainer {
+        max-width: 45vw;
+    }
+
+    .searchForm {
+        border-radius: 2vw;
+    }
+
+    .searchInput {
+        font-size: 1.1vw;
+        padding: 1.5vh 1.5vw;
+    }
+
+    .searchBtn {
+        font-size: 1.2vw;
+        padding: 0 1.5vw;
+    }
+
+    .filterButton {
+        font-size: 1.1vw;
+        padding: 1.5vh 2vw;
+        border-radius: 2vw;
+    }
+
+    .cardsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(25vw, 1fr));
+        max-width: 85vw;
+        gap: 2.5vh;
+        padding: 2.5vh;
+    }
+
+    .fixedCalcBtn {
+        right: 2vw;
+        bottom: 3vh;
+        padding: 2vh 2vw;
+        max-width: 8vw;
+        max-height: 8vh;
+        font-size: 1.1vw;
+        border-radius: 2vw;
+    }
+
+    .iconWrapperIco {
+        max-width: 4vw;
+        max-height: 4vh;
+    }
+
+    .badge {
+        font-size: 0.9vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        max-width: 80vw;
+        padding: 5vh 3vw 3vh;
+    }
+
+    .heroTitle {
+        font-size: 3.2vw;
+    }
+
+    .heroSubtitle {
+        font-size: 1.6vw;
+        max-width: 55vw;
+    }
+
+    .searchRow {
+        max-width: 80vw;
+        flex-direction: column;
+        gap: 2.5vh;
+    }
+
+    .searchContainer {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .searchForm {
+        border-radius: 2.5vw;
+        min-height: 6vh;
+    }
+
+    .searchInput {
+        font-size: 1.8vw;
+        padding: 1.8vh 2vw;
+    }
+
+    .searchBtn {
+        font-size: 1.9vw;
+        padding: 0 2.5vw;
+    }
+
+    .filterButton {
+        font-size: 1.8vw;
+        padding: 1.8vh 3vw;
+        border-radius: 2.5vw;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cardsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(35vw, 1fr));
+        max-width: 90vw;
+        gap: 2vh;
+        padding: 2vh;
+    }
+
+    .fixedCalcBtn {
+        right: 3vw;
+        bottom: 3vh;
+        padding: 1.8vh 1.8vw;
+        max-width: 10vw;
+        max-height: 10vh;
+        font-size: 1.6vw;
+        border-radius: 2.5vw;
+    }
+
+    .iconWrapperIco {
+        max-width: 5vw;
+        max-height: 5vh;
+    }
+
+    .badge {
+        font-size: 1.2vw;
+        top: -0.5vw;
+        right: -0.8vh;
+    }
+
+    /* Обновляем состояния загрузки и ошибки для планшетов */
+    .loadingContainer,
+    .errorContainer,
+    .noResults {
+        padding: 6vh 0;
+    }
+
+    .spinner {
+        width: 6vw;
+        height: 6vw;
+        border-width: 0.4vw;
+    }
+
+    .errorContainer h3,
+    .noResults h3 {
+        font-size: 2.2vw;
+    }
+
+    .errorContainer p,
+    .noResults p {
+        font-size: 1.6vw;
+    }
+
+    .retryButton,
+    .clearFiltersButton {
+        font-size: 1.6vw;
+        padding: 1.5vh 2.5vw;
+        border-radius: 1vw;
+    }
+}
+
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ БОЛЬШИХ СМАРТФОНОВ === */
+@media (max-width: 480px) {
     .cargoCatalog {
         padding: 0;
         min-height: 100vh;
         background: var(--bgGradient);
-        position: relative;
-        overflow-x: hidden;
     }
 
     /* Хлебные крошки */
     .cargoCatalog :global(.breadcrumbs) {
         padding: 16px 16px 8px !important;
         font-size: 14px !important;
-        position: relative;
-        z-index: 10;
     }
 
     .cargoCatalog :global(.breadcrumbs a),
@@ -353,41 +531,34 @@
 
     /* Герой секция */
     .hero {
-        padding: 24px 20px 16px;
+        padding: 20px 16px 12px;
         max-width: 100%;
         text-align: left;
-        position: relative;
-        z-index: 5;
     }
 
     .heroTitle {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--textColor);
+        font-size: 24px;
         text-transform: none;
-        margin-bottom: 12px;
-        line-height: 1.2;
-        position: relative;
+        margin-bottom: 8px;
+        -webkit-text-fill-color: var(--textColor);
+        background: none;
     }
 
     .heroTitle::after {
         content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 48px;
+        display: block;
+        width: 40px;
         height: 3px;
         background: linear-gradient(90deg, var(--mainColor), transparent);
         border-radius: 2px;
+        margin-top: 8px;
     }
 
     .heroSubtitle {
-        font-size: 16px;
-        color: var(--textSecondary);
-        margin-bottom: 24px;
-        font-weight: 400;
-        line-height: 1.5;
+        font-size: 14px;
+        margin-bottom: 20px;
         max-width: 100%;
+        line-height: 1.4;
     }
 
     /* Поиск и фильтры */
@@ -395,10 +566,9 @@
         flex-direction: column;
         max-width: 100%;
         align-items: stretch;
-        gap: 16px;
+        gap: 12px;
         margin: 0;
-        position: relative;
-        z-index: 5;
+        padding: 0 16px;
     }
 
     .searchContainer {
@@ -407,85 +577,51 @@
     }
 
     .searchForm {
-        border-radius: 16px;
+        border-radius: 12px;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
         border: 1px solid var(--borderColor);
-        min-height: 56px;
-        transition: all 0.3s ease;
+        min-height: 48px;
     }
 
     .searchForm:focus-within {
         border-color: var(--mainColor);
         box-shadow: 0 0 0 2px rgba(255, 80, 0, 0.2);
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
 
     .searchInput {
-        padding: 16px 20px;
-        font-size: 16px;
+        padding: 12px 16px;
+        font-size: 14px;
         font-weight: 400;
-        color: var(--textColor);
     }
 
     .searchInput::placeholder {
         color: rgba(255, 255, 255, 0.5);
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .searchBtn {
-        padding: 0 24px;
-        font-size: 18px;
+        padding: 0 20px;
+        font-size: 16px;
         background: var(--mainColor);
-        border-radius: 0 16px 16px 0;
-        min-width: 64px;
-        transition: all 0.3s ease;
-    }
-
-    .searchBtn:active {
-        background: var(--mainColorLight);
-        transform: scale(0.95);
+        border-radius: 0 12px 12px 0;
+        min-width: 56px;
     }
 
     .filterButton {
-        padding: 16px 24px;
-        font-size: 16px;
-        border-radius: 16px;
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 12px;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
         border: 1px solid var(--borderColor);
         justify-content: center;
         width: 100%;
-        gap: 12px;
+        gap: 8px;
         color: var(--textColor);
         font-weight: 500;
-        min-height: 56px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .filterButton::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-        );
-        transition: left 0.6s ease;
-    }
-
-    .filterButton:active::before {
-        left: 100%;
-    }
-
-    .filterButton i {
-        font-size: 18px;
+        min-height: 48px;
     }
 
     .filterButtonActive {
@@ -495,53 +631,37 @@
     }
 
     .filterIndicator {
-        width: 8px;
-        height: 8px;
-        top: -4px;
-        right: -4px;
-        background: var(--mainColor);
-        box-shadow: 0 0 10px var(--mainColor);
+        width: 6px;
+        height: 6px;
+        top: -3px;
+        right: -3px;
     }
 
     /* Сетка карточек */
     .cardsGrid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
         max-width: 100%;
-        padding: 16px 16px 96px;
+        padding: 12px 16px 80px;
         margin: 0 auto;
-        position: relative;
-        z-index: 1;
     }
 
     /* Плавающая кнопка корзины */
     .fixedCalcBtn {
         position: fixed;
-        bottom: 32px;
-        right: 24px;
-        width: 72px;
-        height: 72px;
+        bottom: 24px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
-        box-shadow:
-                0 8px 32px rgba(255, 80, 0, 0.4),
-                0 4px 16px rgba(255, 80, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        box-shadow: 0 6px 24px rgba(255, 80, 0, 0.4);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0;
         z-index: 100;
         border: none;
-        transition: all 0.3s ease;
-    }
-
-    .fixedCalcBtn:active:not(.disabled) {
-        transform: scale(0.92);
-        background: linear-gradient(135deg, #e55a00 0%, #ff5e00 100%);
-        box-shadow:
-                0 4px 16px rgba(255, 80, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .iconWrapper {
@@ -554,199 +674,229 @@
     }
 
     .iconWrapperIco {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         filter: brightness(0) invert(1);
-        transition: transform 0.3s ease;
-    }
-
-    .fixedCalcBtn:active:not(.disabled) .iconWrapperIco {
-        transform: scale(0.9);
     }
 
     .badge {
         position: absolute;
-        top: -4px;
-        right: -4px;
+        top: -2px;
+        right: -2px;
         background: #ff4444;
         color: white;
         border-radius: 50%;
-        width: 28px;
-        height: 28px;
+        width: 20px;
+        height: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 14px;
+        font-size: 10px;
         font-weight: 700;
-        border: 3px solid #1a1a1a;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        animation: pulse 2s infinite;
+        border: 2px solid #1a1a1a;
     }
 
-    /* Состояние загрузки */
+    /* Состояния */
+    .loadingContainer {
+        padding: 48px 24px;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        margin-bottom: 16px;
+    }
+
+    .loadingContainer p {
+        font-size: 14px;
+    }
+
+    .errorContainer {
+        padding: 48px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 12px 16px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+    }
+
+    .errorContainer h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .errorContainer p {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .retryButton {
+        padding: 12px 24px;
+        font-size: 14px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .noResults {
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 12px 16px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--borderColor);
+    }
+
+    .noResults h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .noResults p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .clearFiltersButton {
+        padding: 12px 24px;
+        font-size: 14px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 280px;
+        font-weight: 600;
+    }
+}
+
+/* === УТОЧНЕНИЯ ДЛЯ IPHONE 12 (390px) === */
+@media (max-width: 390px) {
+    .hero {
+        padding: 24px 20px 16px;
+    }
+
+    .heroTitle {
+        font-size: 28px;
+    }
+
+    .heroTitle::after {
+        width: 48px;
+        margin-top: 10px;
+    }
+
+    .heroSubtitle {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .searchRow {
+        padding: 0 20px;
+        gap: 16px;
+    }
+
+    .searchForm {
+        border-radius: 16px;
+        min-height: 56px;
+    }
+
+    .searchInput {
+        padding: 16px 20px;
+        font-size: 16px;
+    }
+
+    .searchInput::placeholder {
+        font-size: 16px;
+    }
+
+    .searchBtn {
+        padding: 0 24px;
+        font-size: 18px;
+        min-width: 64px;
+    }
+
+    .filterButton {
+        padding: 16px 24px;
+        font-size: 16px;
+        border-radius: 16px;
+        min-height: 56px;
+        gap: 12px;
+    }
+
+    .cardsGrid {
+        padding: 16px 20px 96px;
+        gap: 16px;
+    }
+
+    .fixedCalcBtn {
+        width: 72px;
+        height: 72px;
+        right: 24px;
+        bottom: 32px;
+    }
+
+    .iconWrapperIco {
+        width: 32px;
+        height: 32px;
+    }
+
+    .badge {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        top: -4px;
+        right: -4px;
+        border: 3px solid #1a1a1a;
+    }
+
     .loadingContainer {
         padding: 64px 32px;
-        text-align: center;
-        position: relative;
-        z-index: 1;
     }
 
     .spinner {
         width: 48px;
         height: 48px;
-        border-width: 3px;
-        border-top-color: var(--mainColor);
-        margin-bottom: 24px;
     }
 
     .loadingContainer p {
         font-size: 18px;
-        color: var(--textSecondary);
-        font-weight: 500;
-    }
-
-    /* Состояние ошибки */
-    .errorContainer {
-        padding: 64px 24px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.05);
-        margin: 16px;
-        border-radius: 16px;
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--borderColor);
-        position: relative;
-        z-index: 1;
-    }
-
-    .errorContainer h3 {
-        font-size: 22px;
-        margin-bottom: 16px;
-        color: #ff6b6b;
-        font-weight: 600;
-    }
-
-    .errorContainer p {
-        font-size: 16px;
-        margin-bottom: 32px;
-        color: var(--textSecondary);
-        line-height: 1.5;
-    }
-
-    .retryButton {
-        padding: 16px 32px;
-        font-size: 16px;
-        border-radius: 12px;
-        font-weight: 600;
-        background: var(--mainColor);
-        color: white;
-        border: none;
-        transition: all 0.3s ease;
-    }
-
-    .retryButton:active {
-        transform: scale(0.95);
-        background: var(--mainColorLight);
-    }
-
-    /* Нет результатов */
-    .noResults {
-        padding: 48px 24px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.05);
-        margin: 16px;
-        border-radius: 16px;
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--borderColor);
-        position: relative;
-        z-index: 1;
-    }
-
-    .noResults h3 {
-        font-size: 22px;
-        margin-bottom: 16px;
-        color: var(--textColor);
-        font-weight: 600;
-    }
-
-    .noResults p {
-        font-size: 16px;
-        margin-bottom: 24px;
-        color: var(--textSecondary);
-        line-height: 1.5;
-    }
-
-    .clearFiltersButton {
-        padding: 16px 32px;
-        font-size: 16px;
-        border-radius: 12px;
-        background: var(--mainColor);
-        color: white;
-        border: none;
-        width: 100%;
-        max-width: 300px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .clearFiltersButton:active {
-        transform: scale(0.95);
-        background: var(--mainColorLight);
-    }
-
-    /* Анимации для мобильных */
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .cardsGrid > * {
-        animation: slideUp 0.4s ease-out;
-    }
-
-    /* ФИКС ДЛЯ МОДАЛЬНОГО ОКНА ФИЛЬТРОВ */
-    /* Убираем все глобальные переопределения и используем нормальные стили */
-}
-
-/* Дополнительные медиа-запросы для других устройств */
-@media (max-width: 428px) and (min-width: 391px) {
-    /* Для iPhone 12 Pro Max и подобных */
-    .hero {
-        padding: 32px 24px 16px;
-    }
-
-    .heroTitle {
-        font-size: 30px;
-    }
-
-    .heroSubtitle {
-        font-size: 17px;
     }
 }
 
+/* === ОПТИМИЗАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
 @media (max-width: 320px) {
-    /* Для очень маленьких экранов */
+    .hero {
+        padding: 20px 16px 12px;
+    }
+
     .heroTitle {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .heroSubtitle {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    .searchRow {
+        padding: 0 16px;
+        gap: 12px;
+    }
+
+    .searchForm {
+        min-height: 48px;
     }
 
     .searchInput {
-        font-size: 15px;
-        padding: 14px 18px;
+        padding: 14px 16px;
+        font-size: 14px;
     }
 
     .filterButton {
-        font-size: 15px;
         padding: 14px 20px;
+        font-size: 14px;
+        min-height: 48px;
+    }
+
+    .cardsGrid {
+        padding: 12px 16px 80px;
+        gap: 12px;
     }
 
     .fixedCalcBtn {
@@ -765,5 +915,72 @@
         width: 24px;
         height: 24px;
         font-size: 12px;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 16px 20px 8px;
+    }
+
+    .heroTitle {
+        font-size: 22px;
+        margin-bottom: 6px;
+    }
+
+    .heroSubtitle {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .searchRow {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .filterButton {
+        min-height: 44px;
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+
+    .cardsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        padding-bottom: 70px;
+    }
+
+    .fixedCalcBtn {
+        width: 56px;
+        height: 56px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* === ПОДДЕРЖКА HIGH-DPI ЭКРАНОВ === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .searchForm,
+    .filterButton,
+    .fixedCalcBtn {
+        border-width: 0.5px;
+    }
+}
+
+/* === АНИМАЦИИ ДЛЯ МОБИЛЬНЫХ === */
+@media (max-width: 768px) {
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cardsGrid > * {
+        animation: slideUp 0.4s ease-out;
     }
 }

@@ -4,7 +4,12 @@ import styles from './Home.module.css';
 const Home = () => {
     return (
         <div className={styles.home}>
+            {/* Анимация как фон - занимает весь экран */}
+            <div className={styles.backgroundAnimation}>
+                <ThreeScene />
+            </div>
 
+            {/* Контент поверх анимации */}
             <div className={styles.content}>
                 <div className={styles.textSection}>
                     <h1 className={styles.title}>Добро пожаловать в CraneCalc</h1>
@@ -19,8 +24,9 @@ const Home = () => {
                     </div>
                 </div>
 
+                {/* Этот блок теперь для баланса композиции */}
                 <div className={styles.craneSection}>
-                    <ThreeScene />
+                    {/* Можно оставить пустым или добавить декоративные элементы */}
                 </div>
             </div>
         </div>

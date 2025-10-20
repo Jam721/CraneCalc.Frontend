@@ -40,8 +40,28 @@
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* ThreeScene.module.css адаптация */
-@media (max-width: 390px) {
+/* ThreeScene.module.css адаптация для мобильных */
+@media (max-width: 1024px) {
+    .sceneContainer::before {
+        width: 4vw;
+        height: 4vw;
+        border-width: 0.3vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .sceneContainer {
+        border-radius: 1.2vw;
+    }
+
+    .sceneContainer::before {
+        width: 6vw;
+        height: 6vw;
+        border-width: 0.4vw;
+    }
+}
+
+@media (max-width: 480px) {
     .sceneContainer {
         width: 100%;
         height: 100%;
@@ -54,24 +74,27 @@
         height: 100% !important;
     }
 
-    /* Индикатор загрузки для мобильных */
     .sceneContainer::before {
-        width: 40px;
-        height: 40px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-top: 3px solid var(--mainColor);
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid var(--mainColor);
+    }
+
+    .sceneContainer.loading::before {
+        opacity: 1;
     }
 }
 
-/* Дополнительные медиа-запросы для других устройств */
+/* === ДОПОЛНИТЕЛЬНЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ ДРУГИХ УСТРОЙСТВ === */
 @media (max-width: 428px) and (min-width: 391px) {
     /* Для iPhone 12 Pro Max и подобных */
     .textSection {
-        padding: 56px 28px 40px;
+        padding: 70px 28px 48px;
     }
 
     .title {
-        font-size: 34px;
+        font-size: 36px;
     }
 
     .subtitle {
@@ -79,14 +102,18 @@
     }
 
     .craneSection {
-        height: 340px;
+        height: 360px;
+    }
+
+    .ctaButton {
+        max-width: 340px;
     }
 }
 
 @media (max-width: 320px) {
     /* Для очень маленьких экранов */
     .textSection {
-        padding: 40px 20px 28px;
+        padding: 50px 16px 32px;
     }
 
     .title {
@@ -98,21 +125,121 @@
     }
 
     .description p {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .featuresList li {
-        font-size: 14px;
-        padding-left: 24px;
+        font-size: 15px;
+        padding-left: 28px;
     }
 
     .ctaButton {
-        padding: 18px 28px;
+        padding: 18px 32px;
         font-size: 16px;
-        max-width: 240px;
+        max-width: 280px;
     }
 
     .craneSection {
         height: 280px;
+    }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ АЛЬБОМНОЙ ОРИЕНТАЦИИ === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .home {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .content {
+        flex-direction: row;
+        height: 70vh;
+        gap: 3vw;
+        padding: 2vh 3%;
+    }
+
+    .textSection {
+        flex: 1;
+        padding: 0;
+        text-align: left;
+    }
+
+    .title {
+        font-size: 4vw;
+    }
+
+    .subtitle {
+        font-size: 2vw;
+    }
+
+    .description p {
+        font-size: 1.6vw;
+    }
+
+    .featuresList li {
+        font-size: 1.4vw;
+        padding-left: 2.5vw;
+    }
+
+    .ctaButton {
+        font-size: 1.6vw;
+        padding: 1.5vh 3vw;
+        max-width: none;
+    }
+
+    .craneSection {
+        flex: 1;
+        height: 100%;
+    }
+}
+
+/* === ПОДДЕРЖКА HIGH-DPI ЭКРАНОВ === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @media (max-width: 480px) {
+        .textSection {
+            background: rgba(21, 21, 21, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .ctaButton {
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+/* === УЛУЧШЕНИЯ ДЛЯ IOS SAFARI === */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 480px) {
+        .home {
+            /* Фикс для высоты на iOS */
+            min-height: -webkit-fill-available;
+        }
+
+        .textSection {
+            /* Улучшение рендеринга blur в Safari */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .ctaButton {
+            /* Улучшение нажатия на кнопку в iOS */
+            -webkit-tap-highlight-color: rgba(255, 80, 0, 0.3);
+        }
+    }
+}
+
+/* === УЛУЧШЕНИЯ ДОСТУПНОСТИ === */
+@media (max-width: 480px) {
+    .ctaButton:focus {
+        outline: 3px solid rgba(255, 80, 0, 0.5);
+        outline-offset: 2px;
+    }
+
+    .featuresList li:focus-within {
+        outline: 2px solid var(--mainColor);
+        outline-offset: 4px;
+        border-radius: 4px;
     }
 }

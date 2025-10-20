@@ -119,12 +119,99 @@
     background-color: rgba(0, 0, 0, 0.15);
 }
 
-/* === Стильный мобильный дизайн для iPhone 12 === */
-@media (max-width: 390px) {
+/* === Адаптивные стили для планшетов === */
+@media (max-width: 1024px) {
     .rentCard {
-        border-radius: 20px;
+        border-radius: 12px;
+        min-height: 420px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .rentCardPhoto {
+        height: 220px;
+    }
+
+    .contentName {
+        font-size: 11px;
+        padding: 12px 16px;
+    }
+
+    .contentText {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    .rentCardButton {
+        height: 56px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rentCard {
+        border-radius: 16px;
+        min-height: 400px;
+        margin: 0 20px 20px 20px;
+        width: calc(100% - 40px);
+        box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .rentCardPhoto {
+        height: 200px;
+        border-radius: 14px 14px 0 0;
+    }
+
+    .rentCardPhoto img {
+        border-radius: 14px 14px 0 0;
+    }
+
+    .rentCardContent {
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: none;
+        min-height: auto;
+        padding: 16px 20px 8px;
+    }
+
+    .contentName {
+        width: 100%;
+        padding: 0 0 6px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .contentText {
+        width: 100%;
+        padding: 0 0 12px;
+        font-size: 16px;
+        justify-content: flex-start;
+        text-transform: none;
+    }
+
+    .rentCardButton {
+        height: 54px;
+        font-size: 15px;
+        margin: 8px 20px 16px;
+        width: calc(100% - 40px);
+        border-radius: 12px;
+    }
+
+    .rentCardButton button,
+    .btnDetail {
+        padding: 12px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+}
+
+/* === Стильный мобильный дизайн для iPhone 12 и современных смартфонов === */
+@media (max-width: 480px) {
+    .rentCard {
+        border-radius: 18px;
         min-height: 380px;
-        margin: 0 16px 24px 16px;
+        margin: 0 16px 20px 16px;
         width: calc(100% - 32px);
         background: var(--cardBg);
         border: 1px solid var(--borderColor);
@@ -257,11 +344,11 @@
     .rentCardButton {
         margin-left: 5%;
         width: 90%;
-        height: 60px;
+        height: 56px;
         font-size: 16px;
         flex-direction: column;
         background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 50%, var(--mainColorLight) 100%);
-        border-radius: 18px;
+        border-radius: 16px;
         margin-top: 8px;
         position: relative;
         overflow: hidden;
@@ -310,16 +397,72 @@
         padding: 12px;
         font-size: 16px;
         font-weight: 700;
-        border-radius: 0 0 18px 18px;
+        border-radius: 16px;
+    }
+}
+
+/* === Оптимизация для очень маленьких экранов === */
+@media (max-width: 360px) {
+    .rentCard {
+        border-radius: 16px;
+        min-height: 360px;
+        margin: 0 12px 16px 12px;
+        width: calc(100% - 24px);
     }
 
-    /* Анимации */
-    @keyframes shimmer {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
+    .rentCardPhoto {
+        height: 180px;
     }
 
-    /* Иконки с использованием цветов бренда */
+    .rentCardContent {
+        padding: 16px 16px 8px;
+    }
+
+    .contentName {
+        font-size: 11px;
+    }
+
+    .contentText {
+        font-size: 16px;
+    }
+
+    .rentCardButton {
+        height: 52px;
+        font-size: 15px;
+        margin: 6px 16px 12px;
+        width: calc(100% - 32px);
+    }
+}
+
+/* === Оптимизация для больших смартфонов и маленьких планшетов в альбомной ориентации === */
+@media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+    .rentCard {
+        min-height: 320px;
+        margin: 0 20px 20px 20px;
+    }
+
+    .rentCardPhoto {
+        height: 160px;
+    }
+
+    .rentCardContent {
+        padding: 16px 20px 8px;
+    }
+
+    .rentCardButton {
+        height: 50px;
+        margin: 6px 20px 16px;
+    }
+}
+
+/* === Анимации === */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* === Иконки с использованием цветов бренда === */
+@media (max-width: 768px) {
     .rentCardContent:nth-child(2) .contentName::before {
         content: '📦 ';
         margin-right: 6px;
@@ -348,14 +491,20 @@
     }
 }
 
-/* Дополнительные стили для улучшения читаемости */
-@media (max-width: 390px) {
+/* === Дополнительные улучшения для читаемости === */
+@media (max-width: 768px) {
     .rentCard {
-        /* Добавляем легкий внутренний glow эффект */
         box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 0 2px 8px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
                 0 0 0 1px rgba(255, 80, 0, 0.1);
+    }
+}
+
+/* === Поддержка устройств с очень высоким DPI === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .rentCard {
+        border-width: 0.5px;
     }
 }
