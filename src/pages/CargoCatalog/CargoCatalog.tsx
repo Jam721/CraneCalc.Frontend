@@ -1,25 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import type { CargoItem } from '../../types/cargo';
 import CargoCard from '../../components/CargoCard/CargoCard';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import FiltersModal from '../../components/FiltersModal/FiltersModal';
+//import FiltersModal from '../../components/FiltersModal/FiltersModal';
 import type { BreadcrumbItem } from '../../types/breadcrumbs';
 import { useCargoData } from '../../hooks/useCargoData';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import {setFilters, clearFilters, type FiltersState} from '../../store/slices/filtersSlice';
+import {setFilters, clearFilters} from '../../store/slices/filtersSlice';
 import styles from './CargoCatalog.module.css';
-import craneImg from '/assets/crane.png';
+// import craneImg from '/assets/crane.png';
 
 const CargoCatalog = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
     const [filteredCargo, setFilteredCargo] = useState<CargoItem[]>([]);
-    const [cartQuantity, setCartQuantity] = useState(0);
+    // const [cartQuantity, setCartQuantity] = useState(0);
     const [, setAddingItems] = useState<Set<string>>(new Set());
-    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
-    // Redux state
     const activeFilters = useAppSelector((state) => state.filters);
     const dispatch = useAppDispatch();
 
@@ -35,14 +32,21 @@ const CargoCatalog = () => {
         { label: 'Каталог грузов', isActive: true }
     ];
 
+    // Инициализация поиска из Redux при загрузке
+    useEffect(() => {
+        if (activeFilters.SearchQuery) {
+            setSearchQuery(activeFilters.SearchQuery);
+        }
+    }, []);
+
     // Фильтрация с использованием Redux состояния
     useEffect(() => {
         let filtered = [...cargoData];
 
-        if (appliedSearchQuery.trim() !== '') {
+        if (activeFilters.SearchQuery && activeFilters.SearchQuery.trim() !== '') {
             filtered = filtered.filter(cargo =>
-                cargo.title.toLowerCase().includes(appliedSearchQuery.toLowerCase()) ||
-                cargo.type.toLowerCase().includes(appliedSearchQuery.toLowerCase())
+                cargo.title.toLowerCase().includes(activeFilters.SearchQuery!.toLowerCase()) ||
+                cargo.type.toLowerCase().includes(activeFilters.SearchQuery!.toLowerCase())
             );
         }
 
@@ -61,11 +65,12 @@ const CargoCatalog = () => {
         }
 
         setFilteredCargo(filtered);
-    }, [cargoData, appliedSearchQuery, activeFilters]);
+    }, [cargoData, activeFilters]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        setAppliedSearchQuery(searchQuery);
+        // Сохраняем поисковый запрос в Redux
+        dispatch(setFilters({ ...activeFilters, SearchQuery: searchQuery }));
     };
 
     const handleAddToCart = async (cargoId: string) => {
@@ -73,7 +78,7 @@ const CargoCatalog = () => {
 
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        setCartQuantity(prev => prev + 1);
+        //setCartQuantity(prev => prev + 1);
         setAddingItems(prev => {
             const newSet = new Set(prev);
             newSet.delete(cargoId);
@@ -81,20 +86,21 @@ const CargoCatalog = () => {
         });
     };
 
-    const handleApplyFilters = (filters: FiltersState) => {
-        dispatch(setFilters(filters));
-    };
+    // const handleApplyFilters = (filters: FiltersState) => {
+    //     dispatch(setFilters(filters));
+    // };
 
     const handleClearFilters = () => {
         dispatch(clearFilters());
+        setSearchQuery(''); // Очищаем локальное состояние поиска
     };
 
     const hasActiveFilters = Object.values(activeFilters).some(value =>
         value !== undefined && value !== '' && value !== 0
     );
 
-    const isCartEmpty = cartQuantity === 0;
-    const cartClass = isCartEmpty ? `${styles.fixedCalcBtn} ${styles.disabled}` : styles.fixedCalcBtn;
+    // const isCartEmpty = cartQuantity === 0;
+    // const cartClass = isCartEmpty ? `${styles.fixedCalcBtn} ${styles.disabled}` : styles.fixedCalcBtn;
 
     if (loading) {
         return (
@@ -151,15 +157,6 @@ const CargoCatalog = () => {
                             </button>
                         </div>
                     </form>
-
-                    <button
-                        className={`${styles.filterButton} ${hasActiveFilters ? styles.filterButtonActive : ''}`}
-                        onClick={() => setIsFiltersOpen(true)}
-                    >
-                        <i className="fas fa-filter"></i>
-                        Фильтры
-                        {hasActiveFilters && <span className={styles.filterIndicator}></span>}
-                    </button>
                 </div>
             </section>
 
@@ -177,14 +174,10 @@ const CargoCatalog = () => {
                 <div className={styles.noResults}>
                     <h3>Грузы не найдены</h3>
                     <p>Попробуйте изменить параметры поиска или фильтры</p>
-                    {(hasActiveFilters || appliedSearchQuery) && (
+                    {(hasActiveFilters || searchQuery) && (
                         <button
                             className={styles.clearFiltersButton}
-                            onClick={() => {
-                                handleClearFilters();
-                                setSearchQuery('');
-                                setAppliedSearchQuery('');
-                            }}
+                            onClick={handleClearFilters}
                         >
                             Сбросить все фильтры
                         </button>
@@ -192,23 +185,23 @@ const CargoCatalog = () => {
                 </div>
             )}
 
-            <Link
-                to={isCartEmpty ? '#' : '/cart'}
-                className={cartClass}
-                onClick={(e) => isCartEmpty && e.preventDefault()}
-            >
-                <div className={styles.iconWrapper}>
-                    <img src={craneImg} alt="crane" className={styles.iconWrapperIco}/>
-                    <span className={styles.badge}>{cartQuantity}</span>
-                </div>
-            </Link>
+            {/*<Link*/}
+            {/*    to={isCartEmpty ? '#' : '/cart'}*/}
+            {/*    className={cartClass}*/}
+            {/*    onClick={(e) => isCartEmpty && e.preventDefault()}*/}
+            {/*>*/}
+            {/*    <div className={styles.iconWrapper}>*/}
+            {/*        <img src={craneImg} alt="crane" className={styles.iconWrapperIco}/>*/}
+            {/*        <span className={styles.badge}>{cartQuantity}</span>*/}
+            {/*    </div>*/}
+            {/*</Link>*/}
 
-            <FiltersModal
-                isOpen={isFiltersOpen}
-                onClose={() => setIsFiltersOpen(false)}
-                onApplyFilters={handleApplyFilters}
-                currentFilters={activeFilters}
-            />
+            {/*<FiltersModal*/}
+            {/*    isOpen={isFiltersOpen}*/}
+            {/*    onClose={() => setIsFiltersOpen(false)}*/}
+            {/*    onApplyFilters={handleApplyFilters}*/}
+            {/*    currentFilters={activeFilters}*/}
+            {/*/>*/}
         </div>
     );
 };

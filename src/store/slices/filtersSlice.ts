@@ -5,6 +5,7 @@ export interface FiltersState {
     Type?: string;
     MinWeight?: number;
     MaxWeight?: number;
+    SearchQuery?: string;
 }
 
 const initialState: FiltersState = {};
