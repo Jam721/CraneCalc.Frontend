@@ -12,7 +12,7 @@ export default defineConfig({
       },
       manifest: {
         name: 'CraneCalc',
-        short_name: 'CC',
+        short_name: 'CraneCalc',
         description: 'Приложение для подсчета производительности башенного крана',
         theme_color: '#ffffff',
         icons: [
@@ -34,7 +34,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://192.168.1.10:8080',
         changeOrigin: true,
         secure: false,
       },
