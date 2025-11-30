@@ -1,12 +1,34 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
+  base: "./",
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization'
+    }
+  },
   plugins: [
     react(),
+    mkcert(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+      },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}']
       },
@@ -30,14 +52,4 @@ export default defineConfig({
       }
     })
   ],
-  base: '/CraneCalc.Frontend/',
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://192.168.1.10:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
 });

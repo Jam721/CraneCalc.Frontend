@@ -2,14 +2,15 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "crane-calc",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.crancecalc.app",
   "build": {
-    "frontendDist": "../build",
-    "devUrl": "http://localhost:5173",
+    "frontendDist": "../dist",
+    "devUrl": "https://localhost:3000",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
   "app": {
+    "withGlobalTauri": false,
     "windows": [
       {
         "title": "CraneCalc",
@@ -20,7 +21,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https: wss: http://localhost:8080"
     }
   },
   "bundle": {
