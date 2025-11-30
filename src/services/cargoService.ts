@@ -5,12 +5,12 @@ import type { ApiResponse, CargoApiParams } from '../types/paginatedResponse';
 import { cargoMockData } from '../mocks/cargoData';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBB54CjP7ixhrbjGVNxxfsgig9NVwWaPEo",
-    authDomain: "cranecalc.firebaseapp.com",
-    projectId: "cranecalc",
-    storageBucket: "cranecalc.firebasestorage.app",
-    messagingSenderId: "536576908230",
-    appId: "1:536576908230:web:d594fa9df77dfec003b0c7",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 console.log('Initializing Firebase with config:', firebaseConfig);
