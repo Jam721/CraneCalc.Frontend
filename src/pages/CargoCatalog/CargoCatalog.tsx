@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import type { CargoItem } from '../../types/cargo';
 import CargoCard from '../../components/CargoCard/CargoCard';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -9,12 +8,13 @@ import { useCargoData } from '../../hooks/useCargoData';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import {setFilters, clearFilters} from '../../store/slices/filtersSlice';
 import styles from './CargoCatalog.module.css';
-// import craneImg from '/assets/crane.png';
+import {Link} from "react-router-dom";
+import craneImg from '/assets/crane.png';
 
 const CargoCatalog = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredCargo, setFilteredCargo] = useState<CargoItem[]>([]);
-    // const [cartQuantity, setCartQuantity] = useState(0);
+    const [cartQuantity] = useState(0);
     const [, setAddingItems] = useState<Set<string>>(new Set());
 
     const activeFilters = useAppSelector((state) => state.filters);
@@ -86,9 +86,6 @@ const CargoCatalog = () => {
         });
     };
 
-    // const handleApplyFilters = (filters: FiltersState) => {
-    //     dispatch(setFilters(filters));
-    // };
 
     const handleClearFilters = () => {
         dispatch(clearFilters());
@@ -99,8 +96,8 @@ const CargoCatalog = () => {
         value !== undefined && value !== '' && value !== 0
     );
 
-    // const isCartEmpty = cartQuantity === 0;
-    // const cartClass = isCartEmpty ? `${styles.fixedCalcBtn} ${styles.disabled}` : styles.fixedCalcBtn;
+    const isCartEmpty = cartQuantity === 0;
+    const cartClass = isCartEmpty ? `${styles.fixedCalcBtn} ${styles.disabled}` : styles.fixedCalcBtn;
 
     if (loading) {
         return (
@@ -185,23 +182,16 @@ const CargoCatalog = () => {
                 </div>
             )}
 
-            {/*<Link*/}
-            {/*    to={isCartEmpty ? '#' : '/cart'}*/}
-            {/*    className={cartClass}*/}
-            {/*    onClick={(e) => isCartEmpty && e.preventDefault()}*/}
-            {/*>*/}
-            {/*    <div className={styles.iconWrapper}>*/}
-            {/*        <img src={craneImg} alt="crane" className={styles.iconWrapperIco}/>*/}
-            {/*        <span className={styles.badge}>{cartQuantity}</span>*/}
-            {/*    </div>*/}
-            {/*</Link>*/}
-
-            {/*<FiltersModal*/}
-            {/*    isOpen={isFiltersOpen}*/}
-            {/*    onClose={() => setIsFiltersOpen(false)}*/}
-            {/*    onApplyFilters={handleApplyFilters}*/}
-            {/*    currentFilters={activeFilters}*/}
-            {/*/>*/}
+            <Link
+                to={isCartEmpty ? '#' : '/cart'}
+                className={cartClass}
+                onClick={(e) => isCartEmpty && e.preventDefault()}
+            >
+                <div className={styles.iconWrapper}>
+                    <img src={craneImg} alt="crane" className={styles.iconWrapperIco}/>
+                    <span className={styles.badge}>{cartQuantity}</span>
+                </div>
+            </Link>
         </div>
     );
 };

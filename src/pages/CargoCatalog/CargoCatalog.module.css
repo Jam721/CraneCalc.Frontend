@@ -649,10 +649,10 @@
     /* Плавающая кнопка корзины */
     .fixedCalcBtn {
         position: fixed;
-        bottom: 24px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
+        bottom: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         background: linear-gradient(135deg, var(--mainColor) 0%, #ff6a00 100%);
         box-shadow: 0 6px 24px rgba(255, 80, 0, 0.4);
@@ -826,21 +826,21 @@
     }
 
     .fixedCalcBtn {
-        width: 72px;
-        height: 72px;
-        right: 24px;
-        bottom: 32px;
+        width: 40px;
+        height: 40px;
+        right: 12px;
+        bottom: 12px;
     }
 
     .iconWrapperIco {
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
     }
 
     .badge {
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
         top: -4px;
         right: -4px;
         border: 3px solid #1a1a1a;
@@ -984,3 +984,4 @@
         animation: slideUp 0.4s ease-out;
     }
 }
+
