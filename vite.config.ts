@@ -10,9 +10,14 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://192.168.1.7:8080',
         changeOrigin: true,
         secure: false,
+      },
+      '/static': {
+        target: `http://192.168.1.7:9000`,
+        changeOrigin: true,
+        secure: false
       },
     },
     headers: {

@@ -5,7 +5,7 @@
   "identifier": "com.crancecalc.app",
   "build": {
     "frontendDist": "../dist",
-    "devUrl": "https://localhost:3000",
+    "devUrl": "https://192.168.1.7:3000",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
@@ -21,7 +21,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https: wss: http://localhost:8080"
+      "csp": null
     }
   },
   "bundle": {

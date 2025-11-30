@@ -2,7 +2,8 @@ import type { CargoItem } from '../types/cargo';
 import type { ApiResponse, CargoApiParams } from '../types/paginatedResponse';
 import { cargoMockData } from '../mocks/cargoData';
 
-const API_BASE_URL = '/api';
+//const API_BASE_URL = '/api';
+const API_BASE_URL = 'https://192.168.1.7:3000/api'
 
 export class CargoService {
     static async getCargoPaginated(params: CargoApiParams = {}): Promise<ApiResponse<CargoItem>> {
