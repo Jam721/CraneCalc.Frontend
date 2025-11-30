@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { CargoItem } from '../../types/cargo';
 import CargoCard from '../../components/CargoCard/CargoCard';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-//import FiltersModal from '../../components/FiltersModal/FiltersModal';
 import type { BreadcrumbItem } from '../../types/breadcrumbs';
 import { useCargoData } from '../../hooks/useCargoData';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
@@ -13,19 +11,27 @@ import craneImg from '/assets/crane.png';
 
 const CargoCatalog = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredCargo, setFilteredCargo] = useState<CargoItem[]>([]);
     const [cartQuantity] = useState(0);
     const [, setAddingItems] = useState<Set<string>>(new Set());
 
     const activeFilters = useAppSelector((state) => state.filters);
     const dispatch = useAppDispatch();
 
+    // Преобразуем Redux фильтры в параметры API
+    const apiParams = {
+        PageSize: 100,
+        Title: activeFilters.SearchQuery || undefined,
+        Type: activeFilters.Type || undefined,
+        MinWeight: activeFilters.MinWeight || undefined,
+        MaxWeight: activeFilters.MaxWeight || undefined,
+    };
+
     const {
         cargoData,
         loading,
         error,
         refetch
-    } = useCargoData({ PageSize: 100 });
+    } = useCargoData(apiParams);
 
     const breadcrumbItems: BreadcrumbItem[] = [
         { label: 'Главная', path: '/' },
@@ -39,38 +45,13 @@ const CargoCatalog = () => {
         }
     }, []);
 
-    // Фильтрация с использованием Redux состояния
-    useEffect(() => {
-        let filtered = [...cargoData];
-
-        if (activeFilters.SearchQuery && activeFilters.SearchQuery.trim() !== '') {
-            filtered = filtered.filter(cargo =>
-                cargo.title.toLowerCase().includes(activeFilters.SearchQuery!.toLowerCase()) ||
-                cargo.type.toLowerCase().includes(activeFilters.SearchQuery!.toLowerCase())
-            );
-        }
-
-        if (activeFilters.Type) {
-            filtered = filtered.filter(cargo =>
-                cargo.type.toLowerCase().includes(activeFilters.Type!.toLowerCase())
-            );
-        }
-
-        if (activeFilters.MinWeight !== undefined) {
-            filtered = filtered.filter(cargo => cargo.weight >= activeFilters.MinWeight!);
-        }
-
-        if (activeFilters.MaxWeight !== undefined) {
-            filtered = filtered.filter(cargo => cargo.weight <= activeFilters.MaxWeight!);
-        }
-
-        setFilteredCargo(filtered);
-    }, [cargoData, activeFilters]);
-
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        // Сохраняем поисковый запрос в Redux
+        // Сохраняем поисковый запрос в Redux и обновляем данные через API
         dispatch(setFilters({ ...activeFilters, SearchQuery: searchQuery }));
+
+        // Перезагружаем данные с новыми фильтрами
+        refetch();
     };
 
     const handleAddToCart = async (cargoId: string) => {
@@ -78,7 +59,6 @@ const CargoCatalog = () => {
 
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        //setCartQuantity(prev => prev + 1);
         setAddingItems(prev => {
             const newSet = new Set(prev);
             newSet.delete(cargoId);
@@ -86,10 +66,11 @@ const CargoCatalog = () => {
         });
     };
 
-
     const handleClearFilters = () => {
         dispatch(clearFilters());
         setSearchQuery(''); // Очищаем локальное состояние поиска
+        // После очистки фильтров перезагружаем данные
+        refetch();
     };
 
     const hasActiveFilters = Object.values(activeFilters).some(value =>
@@ -158,7 +139,7 @@ const CargoCatalog = () => {
             </section>
 
             <div className={styles.cardsGrid}>
-                {filteredCargo.map(cargo => (
+                {cargoData.map(cargo => (
                     <CargoCard
                         key={cargo.id}
                         cargo={cargo}
@@ -167,7 +148,7 @@ const CargoCatalog = () => {
                 ))}
             </div>
 
-            {filteredCargo.length === 0 && !loading && (
+            {cargoData.length === 0 && !loading && (
                 <div className={styles.noResults}>
                     <h3>Грузы не найдены</h3>
                     <p>Попробуйте изменить параметры поиска или фильтры</p>
