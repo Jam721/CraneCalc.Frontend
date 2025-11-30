@@ -8,18 +8,19 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://192.168.1.7:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/static': {
-        target: `http://192.168.1.7:9000`,
-        changeOrigin: true,
-        secure: false
-      },
-    },
+    // УДАЛИТЕ или ЗАКОММЕНТИРУЙТЕ proxy, так как он больше не нужен для Firebase
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://192.168.1.7:8080',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    //   '/static': {
+    //     target: `http://192.168.1.7:9000`,
+    //     changeOrigin: true,
+    //     secure: false
+    //   },
+    // },
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',

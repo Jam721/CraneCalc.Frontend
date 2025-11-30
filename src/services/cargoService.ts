@@ -1,37 +1,145 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import type { CargoItem } from '../types/cargo';
 import type { ApiResponse, CargoApiParams } from '../types/paginatedResponse';
 import { cargoMockData } from '../mocks/cargoData';
 
-const API_BASE_URL = 'https://192.168.1.7:3000/api'
+const firebaseConfig = {
+    apiKey: "AIzaSyBB54CjP7ixhrbjGVNxxfsgig9NVwWaPEo",
+    authDomain: "cranecalc.firebaseapp.com",
+    projectId: "cranecalc",
+    storageBucket: "cranecalc.firebasestorage.app",
+    messagingSenderId: "536576908230",
+    appId: "1:536576908230:web:d594fa9df77dfec003b0c7",
+};
+
+console.log('Initializing Firebase with config:', firebaseConfig);
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Функция для нормализации данных (поддержка обоих форматов)
+function normalizeCargoData(data: any, id: string): CargoItem {
+    // Поддержка как camelCase, так и PascalCase полей
+    return {
+        id: id,
+        concreteGrade: data.concreteGrade || data.ConcreteGrade || '',
+        description: data.description || data.Description || '',
+        height: data.height || data.Height || 0,
+        imageUrl: data.imageUrl || data.ImageUrl || '',
+        length: data.length || data.Length || 0,
+        title: data.title || data.Title || '',
+        type: data.type || data.Type || '',
+        volume: data.volume || data.Volume || 0,
+        weight: data.weight || data.Weight || 0,
+        width: data.width || data.Width || 0
+    };
+}
+
+// Функция для проверки, не удален ли элемент
+function isCargoDeleted(data: any): boolean {
+    return data.isDeleted || data.IsDeleted || false;
+}
 
 export class CargoService {
     static async getCargoPaginated(params: CargoApiParams = {}): Promise<ApiResponse<CargoItem>> {
         try {
-            const url = new URL(`${API_BASE_URL}/cargo/paginated`, window.location.origin);
+            console.log('Fetching from Firestore with params:', params);
 
-            Object.entries(params).forEach(([key, value]) => {
-                if (value !== undefined && value !== null) {
-                    url.searchParams.append(key, value.toString());
+            const pageNumber = params.PageNumber || 1;
+            const pageSize = params.PageSize || 10;
+            const offset = (pageNumber - 1) * pageSize;
+
+            // Получаем все документы из коллекции cargo
+            const querySnapshot = await getDocs(collection(db, 'cargo'));
+
+            console.log('Firestore snapshot size:', querySnapshot.size);
+
+            const cargos: CargoItem[] = [];
+            querySnapshot.forEach((doc) => {
+                const cargoData = doc.data();
+                console.log(`Processing cargo ${doc.id}:`, cargoData);
+
+                // Пропускаем удаленные элементы
+                if (isCargoDeleted(cargoData)) {
+                    console.log(`Skipping deleted cargo: ${doc.id}`);
+                    return;
                 }
+
+                const normalizedCargo = normalizeCargoData(cargoData, doc.id);
+                cargos.push(normalizedCargo);
             });
 
-            const response = await fetch(url.toString(), {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                },
-            });
+            console.log('Processed cargos:', cargos.length);
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            // Применяем фильтры
+            let filteredCargos = cargos;
+
+            if (params.Title) {
+                filteredCargos = filteredCargos.filter(item =>
+                    item.title.toLowerCase().includes(params.Title!.toLowerCase())
+                );
             }
 
-            const data: ApiResponse<CargoItem> = await response.json();
-            return data;
-        } catch (error) {
-            console.warn('API request failed, using mock data:', error);
+            if (params.Type) {
+                filteredCargos = filteredCargos.filter(item =>
+                    item.type.toLowerCase().includes(params.Type!.toLowerCase())
+                );
+            }
 
+            if (params.MinWeight !== undefined) {
+                filteredCargos = filteredCargos.filter(item => item.weight >= params.MinWeight!);
+            }
+
+            if (params.MaxWeight !== undefined) {
+                filteredCargos = filteredCargos.filter(item => item.weight <= params.MaxWeight!);
+            }
+
+            // Применяем пагинацию
+            const startIndex = offset;
+            const endIndex = startIndex + pageSize;
+            const paginatedData = filteredCargos.slice(startIndex, endIndex);
+
+            console.log('Final paginated data:', paginatedData.length, 'items');
+
+            return {
+                totalCount: filteredCargos.length,
+                pageNumber,
+                pageSize,
+                items: paginatedData,
+            };
+        } catch (error) {
+            console.error('Firestore request failed:', error);
+            console.warn('Using mock data instead');
             return this.getMockCargoData(params);
+        }
+    }
+
+    static async getCargoById(id: string): Promise<CargoItem | null> {
+        try {
+            console.log('Fetching cargo from Firestore by ID:', id);
+
+            const docRef = doc(db, 'cargo', id);
+            const docSnap = await getDoc(docRef);
+
+            if (!docSnap.exists()) {
+                console.log('Cargo not found in Firestore');
+                return null;
+            }
+
+            const cargoData = docSnap.data();
+            console.log('Found cargo data:', cargoData);
+
+            // Пропускаем удаленные элементы
+            if (isCargoDeleted(cargoData)) {
+                return null;
+            }
+
+            return normalizeCargoData(cargoData, docSnap.id);
+        } catch (error) {
+            console.error('Firestore request failed:', error);
+            console.warn('Using mock data instead');
+            return cargoMockData.find(item => item.id === id) || null;
         }
     }
 
@@ -70,27 +178,5 @@ export class CargoService {
             pageSize,
             items: paginatedData,
         };
-    }
-
-    static async getCargoById(id: string): Promise<CargoItem | null> {
-        try {
-            const response = await fetch(`${API_BASE_URL}/cargo?CargoId=${id}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data: CargoItem = await response.json();
-            return data;
-        } catch (error) {
-            console.warn('API request failed, using mock data:', error);
-
-            return cargoMockData.find(item => item.id === id) || null;
-        }
     }
 }
