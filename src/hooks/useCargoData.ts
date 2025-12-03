@@ -1,29 +1,54 @@
 // hooks/useCargoData.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { CargoItem } from '../types/cargo';
 import type { CargoApiParams } from '../types/paginatedResponse';
-import { CargoService } from '../services/cargoService.ts';
+import { CargoService } from '../services/cargoService';
 
-export const useCargoData = (params: CargoApiParams = {}) => {
-    const [data, setData] = useState<CargoItem[]>([]);
+export const useCargoData = (initialParams: CargoApiParams = {}) => {
+    const [cargoData, setCargoData] = useState<CargoItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const fetchData = async () => {
+    // Используем ref для initialParams, чтобы избежать лишних ререндеров
+    const initialParamsRef = useRef(initialParams);
+
+    const fetchCargoData = useCallback(async (params: CargoApiParams = {}) => {
         try {
             setLoading(true);
-            const response = await CargoService.getCargoPaginated(params);
-            setData(response.items);
+            setError(null);
+
+            const response = await CargoService.getCargoPaginated({
+                PageNumber: params.PageNumber || initialParamsRef.current.PageNumber || 1,
+                PageSize: params.PageSize || initialParamsRef.current.PageSize || 100,
+                ...params
+            });
+
+            setCargoData(response.items);
+            setTotalCount(response.totalCount);
+            setCurrentPage(response.pageNumber);
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Unknown error');
+            setError(err instanceof Error ? err.message : 'Failed to fetch cargo data');
         } finally {
             setLoading(false);
         }
-    };
+    }, []); // Пустой массив зависимостей - функция создается один раз
 
     useEffect(() => {
-        fetchData();
-    }, [params.PageNumber, params.PageSize, params.Title, params.Type, params.MinWeight, params.MaxWeight]);
+        fetchCargoData(initialParamsRef.current);
+    }, [fetchCargoData]); // Только одна зависимость
 
-    return { cargoData: data, loading, error, refetch: fetchData };
+    const refetch = useCallback((params?: CargoApiParams) => {
+        fetchCargoData(params);
+    }, [fetchCargoData]);
+
+    return {
+        cargoData,
+        loading,
+        error,
+        totalCount,
+        currentPage,
+        refetch
+    };
 };
